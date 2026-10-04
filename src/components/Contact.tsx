@@ -1,7 +1,7 @@
 import { useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Check, LoaderCircle, CircleAlert } from "lucide-react";
-import { profile } from "../data/profile";
+import { contactInfo } from "../data/contact";
 import { Reveal, SocialLinks } from "./Shared";
 import CopyButton from "./CopyButton";
 import {
@@ -103,18 +103,23 @@ export default function Contact() {
           <p className="availability">
             <span /> Open to freelance & internship opportunities
           </p>
-          <div className="email-row">
-            {profile.email ? (
-              <a className="email-link" href={`mailto:${profile.email}`}>
-                {profile.email}
-                <ArrowUpRight size={19} />
-              </a>
-            ) : (
-              <p className="contact-placeholder">Email address coming soon</p>
-            )}
-            <CopyButton value={profile.email} />
-          </div>
-          <SocialLinks />
+          <dl className="contact-details">
+            <div>
+              <dt>Email</dt>
+              <dd>
+                <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+                <CopyButton value={contactInfo.email} label="Copy email" />
+              </dd>
+            </div>
+            <div>
+              <dt>Phone</dt>
+              <dd>
+                <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
+                <CopyButton value={contactInfo.phone} label="Copy phone" />
+              </dd>
+            </div>
+          </dl>
+          <SocialLinks showLabels />
         </Reveal>
         <Reveal>
           <form

@@ -1,7 +1,14 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Github, Linkedin, Facebook, Mail } from "lucide-react";
+import {
+  ArrowUpRight,
+  Github,
+  Instagram,
+  Facebook,
+  Mail,
+  Phone,
+} from "lucide-react";
 import type { ReactNode } from "react";
-import { profile } from "../data/profile";
+import { contactLinks } from "../data/contact";
 export function Reveal({
   children,
   className = "",
@@ -59,42 +66,26 @@ export function ArrowLink({
     </a>
   );
 }
-export function SocialLinks() {
-  const links = [
-    {
-      name: "Email",
-      url: profile.email ? `mailto:${profile.email}` : null,
-      Icon: Mail,
-    },
-    { name: "GitHub", url: profile.github, Icon: Github },
-    { name: "LinkedIn", url: profile.linkedin, Icon: Linkedin },
-    { name: "Facebook", url: profile.facebook, Icon: Facebook },
-  ];
+export function SocialLinks({ showLabels = false }: { showLabels?: boolean }) {
+  const icons = { Facebook, GitHub: Github, Instagram, Email: Mail, Phone };
   return (
-    <div className="socials">
-      {links.map(({ name, url, Icon }) =>
-        url ? (
+    <div className={`socials ${showLabels ? "socials-labeled" : ""}`}>
+      {contactLinks.map(({ name, href, external }) => {
+        const Icon = icons[name];
+        return (
           <a
             key={name}
-            href={url}
+            href={href}
             aria-label={name}
-            target={name === "Email" ? undefined : "_blank"}
-            rel="noreferrer"
+            title={external ? `${name} (opens in a new tab)` : name}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
           >
-            <Icon size={18} />
+            <Icon size={18} aria-hidden="true" />
+            {showLabels && <span>{name}</span>}
           </a>
-        ) : (
-          <span
-            key={name}
-            className="social-placeholder"
-            role="img"
-            aria-label={`${name} — link coming soon`}
-            title={`${name} — link coming soon`}
-          >
-            <Icon size={18} />
-          </span>
-        ),
-      )}
+        );
+      })}
     </div>
   );
 }

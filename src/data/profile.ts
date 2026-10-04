@@ -1,10 +1,7 @@
-// Replace null values when your photo, contact details, and dates are ready.
+import { profileImage } from "./profileImage";
+// Contact details live in contact.ts; the photo is shared by Hero and About.
 export const profile = {
-  photo: null as string | null,
-  email: null as string | null,
-  github: null as string | null,
-  linkedin: null as string | null,
-  facebook: null as string | null,
+  photo: profileImage,
   educationYears: "Years to be added",
 };
 export const experience: {

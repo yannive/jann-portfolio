@@ -20,7 +20,9 @@ npm run preview
 
 ## Personalize
 
-- `src/data/profile.ts`: add your email, social URLs, photo path, education years, work experience, internships, and certifications. Leave unknown values null; no fabricated roles are displayed. Add freelance, internship, and client experience to the `experience` array.
+- `src/data/contact.ts`: edit the email, phone, Facebook, GitHub, and Instagram details in one place. The Hero, Contact section, and Footer share these values. Social profiles open in new tabs; email and phone use `mailto:` and `tel:`.
+- `src/assets/profile.jpg`: add your actual photo here. The Hero and About section automatically load this file; until it exists, an initials placeholder is shown. The Hero uses a responsive rounded container and `object-fit: cover`. See `src/assets/README.md` for the optional direct-import version.
+- `src/data/profile.ts`: edit education years, work experience, internships, and certifications. Add freelance, internship, and client experience to the `experience` array.
 - `src/data/projects.ts`: edit project records, filter categories, problem and solution summaries. Add `role` and `process` when your specific contributions and milestones are ready. Optional `image`, `github`, and `liveUrl` fields connect screenshots and working links. Put images in `public/projects/`. Current previews are illustrative HTML/CSS compositions, not actual screenshots. The UI/UX filter intentionally has an empty state until a case study is added.
 - `src/data/skills.ts`: maintain skill groups and their interactive usage descriptions.
 - `src/data/process.ts`: edit the six workflow stages and outcomes.
@@ -28,9 +30,9 @@ npm run preview
 - `src/lib/contact.ts`: validation and submission adapter. It currently simulates an 850 ms request and returns `mode: "demo"`; nothing is delivered or stored. Replace the delay with your Formspree, EmailJS, or Laravel/API integration, throw on failure, and return `mode: "sent"` only after the provider confirms success. The UI handles loading, errors, success, and a copyable draft. Validate and protect the real endpoint server-side; keep private credentials off the frontend.
 - `index.html`: SEO and social metadata. Add your final canonical URL when publicly deployed.
 
-Social icons without configured URLs are noninteractive, labeled placeholders. The hero is typography-led; the About section contains the photo placeholder. Native dialogs support Escape, focus trapping, and return focus to the launching button. Reduced motion is respected by both CSS and Framer Motion.
+The Hero places the photo beside the introduction on desktop and above it on mobile. `src/hero-contact.css` contains its layout and contact-link styling. Native dialogs support Escape, focus trapping, and return focus to the launching button. Reduced motion is respected by both CSS and Framer Motion.
 
-The email copy control activates when `profile.email` is configured. It confirms successful clipboard writes and explains how to copy manually if clipboard access fails. Only the theme preference is saved in localStorage (`jann-theme`); form contents are not persisted. The initial theme follows the device and keeps following device changes until the visitor chooses a theme.
+The email and phone copy controls use `contactInfo` and show “Copied!” briefly after successful clipboard writes. They explain how to copy manually if clipboard access fails. Only the theme preference is saved in localStorage (`jann-theme`); form contents are not persisted. The initial theme follows the device and keeps following device changes until the visitor chooses a theme.
 
 ### Add project screenshots
 

@@ -29,7 +29,7 @@ export default function CopyButton({
         className="copy-button"
         onClick={copy}
         disabled={!value}
-        aria-label={value ? label : "Email address not available yet"}
+        aria-label={value ? label : "Contact information not available yet"}
       >
         {state === "copied" ? <Check size={15} /> : <Copy size={15} />}
         <span>{state === "copied" ? "Copied!" : label}</span>
