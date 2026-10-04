@@ -87,6 +87,7 @@ export function SocialLinks() {
           <span
             key={name}
             className="social-placeholder"
+            role="img"
             aria-label={`${name} — link coming soon`}
             title={`${name} — link coming soon`}
           >

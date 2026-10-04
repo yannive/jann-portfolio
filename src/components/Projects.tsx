@@ -1,21 +1,22 @@
-import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Check, Github, X } from "lucide-react";
-import { projects, type Project } from "../data/projects";
+import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import {
+  projects,
+  projectFilters,
+  type Project,
+  type ProjectFilter,
+} from "../data/projects";
 import { Reveal, SectionHeading } from "./Shared";
-import ProjectPreview from "./ProjectPreview";
+import ProjectCard from "./ProjectCard";
+import ProjectDetails from "./ProjectDetails";
+
 export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
-  const dialog = useRef<HTMLDialogElement>(null);
-  useEffect(() => {
-    if (selected) {
-      dialog.current?.showModal();
-      const before = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = before;
-      };
-    } else dialog.current?.close();
-  }, [selected]);
+  const [filter, setFilter] = useState<ProjectFilter>("All");
+  const reduce = useReducedMotion();
+  const filtered = projects.filter(
+    (project) => filter === "All" || project.filters.includes(filter),
+  );
   return (
     <section id="projects" className="section container">
       <Reveal>
@@ -25,133 +26,74 @@ export default function Projects() {
           title="Ideas, brought to life."
         >
           <p>
-            A selection of interfaces and systems.
+            Explore the thinking behind the interface.
             <br />
-            Built around real people and real needs.
+            Choose a project to look inside.
           </p>
         </SectionHeading>
       </Reveal>
-      <div className="project-grid">
-        {projects.map((project, i) => (
-          <Reveal className={`project project-${project.id}`} key={project.id}>
-            <button
-              className="project-visual"
-              onClick={() => setSelected(project)}
-              aria-label={`View ${project.title}`}
-            >
-              {project.image ? (
-                <img
-                  src={project.image}
-                  alt={`${project.title} screenshot`}
-                  loading="lazy"
-                />
-              ) : (
-                <>
-                  <ProjectPreview id={project.id} />
-                  <span className="preview-label">ILLUSTRATIVE PREVIEW</span>
-                </>
-              )}
-              <span className="project-open">
-                <ArrowUpRight size={24} />
-              </span>
-            </button>
-            <div className="project-meta">
-              <span>{project.category}</span>
-              <span>0{i + 1}</span>
-            </div>
-            <div className="project-title">
-              <h3>{project.shortTitle}</h3>
-              <button
-                className="text-link"
-                onClick={() => setSelected(project)}
-              >
-                View Project <ArrowUpRight size={17} />
-              </button>
-            </div>
-            <p className="project-description">{project.description}</p>
-            <div className="tags">
-              {project.tech.map((t) => (
-                <span key={t}>{t}</span>
-              ))}
-            </div>
-            {project.github && (
-              <a
-                className="text-link github-link"
-                href={project.github}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Github size={16} /> GitHub <ArrowUpRight size={16} />
-              </a>
-            )}
-          </Reveal>
+      <div
+        className="project-filters"
+        role="group"
+        aria-label="Filter projects"
+      >
+        {projectFilters.map((item) => (
+          <button
+            key={item}
+            aria-pressed={filter === item}
+            onClick={() => setFilter(item)}
+          >
+            {item}
+            <span aria-hidden="true">
+              {item === "All"
+                ? projects.length
+                : projects.filter((project) => project.filters.includes(item))
+                    .length}
+            </span>
+          </button>
         ))}
       </div>
-      <dialog
-        ref={dialog}
-        className="project-dialog"
-        onCancel={() => setSelected(null)}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) setSelected(null);
-        }}
-        onClose={() => setSelected(null)}
-        aria-labelledby="project-dialog-title"
-      >
-        {selected && (
-          <div>
-            <button
-              className="dialog-close"
-              onClick={() => setSelected(null)}
-              aria-label="Close project details"
-              autoFocus
-            >
-              <X />
-            </button>
-            <p className="eyebrow">{selected.category}</p>
-            <h2 id="project-dialog-title">{selected.title}</h2>
-            <p>{selected.description}</p>
-            <h3>Core features</h3>
-            <ul className="feature-list">
-              {selected.features.map((f) => (
-                <li key={f}>
-                  <Check size={16} />
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <h3>Built with</h3>
-            <div className="tags">
-              {selected.tech.map((t) => (
-                <span key={t}>{t}</span>
-              ))}
+      <p className="filter-count" role="status">
+        {filtered.length
+          ? `${filtered.length} ${filtered.length === 1 ? "project" : "projects"} · ${filter}`
+          : "No UI/UX case studies added yet."}
+      </p>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={filter}
+          className={`project-grid ${filter !== "All" ? "is-filtered" : ""}`}
+          initial={{ opacity: 0, y: reduce ? 0 : 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: reduce ? 0 : -6 }}
+          transition={{ duration: reduce ? 0 : 0.18 }}
+        >
+          {filtered.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              onOpen={setSelected}
+            />
+          ))}
+          {!filtered.length && (
+            <div className="project-empty">
+              <span className="eyebrow">MORE TO COME</span>
+              <h3>Design stories are on the way.</h3>
+              <p>
+                In the meantime, explore the interfaces and systems in my
+                development projects.
+              </p>
+              <button
+                className="button secondary"
+                onClick={() => setFilter("All")}
+              >
+                Explore all projects
+              </button>
             </div>
-            {(selected.liveUrl || selected.github) && (
-              <div className="dialog-actions">
-                {selected.liveUrl && (
-                  <a
-                    className="button primary"
-                    href={selected.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Visit website <ArrowUpRight size={16} />
-                  </a>
-                )}
-                {selected.github && (
-                  <a
-                    className="button secondary"
-                    href={selected.github}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Github size={16} /> GitHub
-                  </a>
-                )}
-              </div>
-            )}
-          </div>
-        )}
-      </dialog>
+          )}
+        </motion.div>
+      </AnimatePresence>
+      <ProjectDetails project={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }

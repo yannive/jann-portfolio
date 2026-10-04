@@ -8,7 +8,7 @@ import {
 export default function ProjectPreview({ id }: { id: string }) {
   if (id === "prediqueue")
     return (
-      <div className="queue-preview">
+      <div className="queue-preview" aria-hidden="true">
         <div className="queue-logo">
           <span className="queue-mark">Q</span> PrediQueue{" "}
           <span className="live-tag">● Live queue</span>
@@ -40,7 +40,7 @@ export default function ProjectPreview({ id }: { id: string }) {
     );
   if (id === "commerce")
     return (
-      <div className="shop-preview">
+      <div className="shop-preview" aria-hidden="true">
         <div className="shop-nav">
           <b>
             everyday<span> objects.</span>
@@ -71,7 +71,10 @@ export default function ProjectPreview({ id }: { id: string }) {
     );
   const electro = id === "electrodesk";
   return (
-    <div className={`dashboard-preview ${electro ? "electro" : ""}`}>
+    <div
+      className={`dashboard-preview ${electro ? "electro" : ""}`}
+      aria-hidden="true"
+    >
       <aside className="mock-sidebar">
         <b>
           {electro ? <Zap size={14} /> : <Boxes size={14} />}{" "}

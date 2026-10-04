@@ -1,34 +1,85 @@
-import { useState, type FormEvent } from "react";
-import { ArrowUpRight, Check, Copy } from "lucide-react";
+import { useRef, useState, type FormEvent } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowUpRight, Check, LoaderCircle, CircleAlert } from "lucide-react";
 import { profile } from "../data/profile";
 import { Reveal, SocialLinks } from "./Shared";
-import { submitContact } from "../lib/contact";
+import CopyButton from "./CopyButton";
+import {
+  submitContact,
+  validateContact,
+  type ContactMessage,
+  type ContactResult,
+} from "../lib/contact";
+
+const empty: ContactMessage = { name: "", email: "", subject: "", message: "" };
+const fields = [
+  {
+    name: "name",
+    label: "Your name",
+    placeholder: "Alex Morgan",
+    max: 100,
+    autoComplete: "name",
+  },
+  {
+    name: "email",
+    label: "Email address",
+    placeholder: "alex@example.com",
+    max: 254,
+    autoComplete: "email",
+  },
+  {
+    name: "subject",
+    label: "Subject",
+    placeholder: "A project, an opportunity, or just hello",
+    max: 200,
+  },
+  {
+    name: "message",
+    label: "Your message",
+    placeholder: "Tell me a little about what you have in mind…",
+    max: 5000,
+  },
+] as const;
+
 export default function Contact() {
-  const [status, setStatus] = useState("");
-  const [draft, setDraft] = useState("");
+  const [values, setValues] = useState<ContactMessage>(empty);
+  const [touched, setTouched] = useState<
+    Partial<Record<keyof ContactMessage, boolean>>
+  >({});
   const [busy, setBusy] = useState(false);
-  async function submit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  const [result, setResult] = useState<ContactResult | null>(null);
+  const [error, setError] = useState("");
+  const inFlight = useRef(false);
+  const reduce = useReducedMotion();
+  const errors = validateContact(values);
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (inFlight.current) return;
+    setTouched({ name: true, email: true, subject: true, message: true });
+    const firstError = fields.find((field) => errors[field.name]);
+    if (firstError) {
+      event.currentTarget
+        .querySelector<HTMLElement>(`[name="${firstError.name}"]`)
+        ?.focus();
+      return;
+    }
+    inFlight.current = true;
     setBusy(true);
-    setStatus("");
-    const data = new FormData(e.currentTarget);
+    setError("");
+    setResult(null);
     try {
-      const result = await submitContact({
-        name: String(data.get("name")),
-        email: String(data.get("email")),
-        subject: String(data.get("subject")),
-        message: String(data.get("message")),
-      });
-      setDraft(result.draft);
-      setStatus(
-        "Message prepared. This form is a preview and has not sent your message. You can copy your draft below.",
-      );
+      setResult(await submitContact(values));
     } catch {
-      setStatus("Your message could not be prepared. Please try again.");
+      setError(
+        "Your message could not be processed. Your text is still here — please try again.",
+      );
     } finally {
+      inFlight.current = false;
       setBusy(false);
     }
   }
+
   return (
     <section id="contact" className="contact-band">
       <div className="section container contact-grid">
@@ -52,98 +103,151 @@ export default function Contact() {
           <p className="availability">
             <span /> Open to freelance & internship opportunities
           </p>
-          {profile.email ? (
-            <a className="email-link" href={`mailto:${profile.email}`}>
-              {profile.email}
-              <ArrowUpRight size={19} />
-            </a>
-          ) : (
-            <p className="contact-placeholder">Email address coming soon</p>
-          )}
+          <div className="email-row">
+            {profile.email ? (
+              <a className="email-link" href={`mailto:${profile.email}`}>
+                {profile.email}
+                <ArrowUpRight size={19} />
+              </a>
+            ) : (
+              <p className="contact-placeholder">Email address coming soon</p>
+            )}
+            <CopyButton value={profile.email} />
+          </div>
           <SocialLinks />
         </Reveal>
         <Reveal>
-          <form onSubmit={submit} className="contact-form">
-            <div className="form-row">
-              <label>
-                Your name
-                <input
-                  required
-                  autoComplete="name"
-                  name="name"
-                  placeholder="Alex Morgan"
-                  maxLength={100}
-                />
-              </label>
-              <label>
-                Email address
-                <input
-                  required
-                  autoComplete="email"
-                  type="email"
-                  name="email"
-                  placeholder="alex@example.com"
-                  maxLength={254}
-                />
-              </label>
-            </div>
-            <label>
-              Subject
-              <input
-                required
-                name="subject"
-                placeholder="A project, an opportunity, or just hello"
-                maxLength={200}
-              />
-            </label>
-            <label>
-              Your message
-              <textarea
-                required
-                name="message"
-                rows={5}
-                placeholder="Tell me a little about what you have in mind…"
-                maxLength={5000}
-              />
-            </label>
+          <form
+            onSubmit={submit}
+            className="contact-form"
+            noValidate
+            aria-busy={busy}
+          >
+            <fieldset disabled={busy} className="contact-fields">
+              <legend className="sr-only">
+                Your contact details and message
+              </legend>
+              {fields.map((field) => {
+                const shownError = touched[field.name]
+                  ? errors[field.name]
+                  : undefined;
+                const common = {
+                  id: `contact-${field.name}`,
+                  name: field.name,
+                  required: true,
+                  value: values[field.name],
+                  maxLength: field.max,
+                  placeholder: field.placeholder,
+                  "aria-invalid": Boolean(shownError),
+                  "aria-describedby": shownError
+                    ? `error-${field.name}`
+                    : undefined,
+                  onBlur: () =>
+                    setTouched((previous) => ({
+                      ...previous,
+                      [field.name]: true,
+                    })),
+                  onChange: (
+                    event: React.ChangeEvent<
+                      HTMLInputElement | HTMLTextAreaElement
+                    >,
+                  ) => {
+                    setValues((previous) => ({
+                      ...previous,
+                      [field.name]: event.target.value,
+                    }));
+                    setResult(null);
+                    setError("");
+                  },
+                };
+                return (
+                  <div
+                    className={`form-field field-${field.name}`}
+                    key={field.name}
+                  >
+                    <label htmlFor={common.id}>{field.label}</label>
+                    {field.name === "message" ? (
+                      <textarea {...common} rows={5} />
+                    ) : (
+                      <input
+                        {...common}
+                        type={field.name === "email" ? "email" : "text"}
+                        autoComplete={
+                          "autoComplete" in field
+                            ? field.autoComplete
+                            : undefined
+                        }
+                      />
+                    )}
+                    <div
+                      className="field-feedback"
+                      id={`error-${field.name}`}
+                      aria-live="polite"
+                    >
+                      {shownError && (
+                        <span>
+                          <CircleAlert size={12} />
+                          {shownError}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </fieldset>
             <p className="form-note">
-              Preview form — messages are not delivered yet.
+              Demo form — you can try it, but messages aren't delivered yet.
             </p>
             <button className="button primary" disabled={busy} type="submit">
-              {busy ? "Preparing…" : "Send Message"}
-              <ArrowUpRight size={18} />
+              {busy ? "Preparing your message…" : "Send Message"}
+              {busy ? (
+                <LoaderCircle className="loading-spinner" size={18} />
+              ) : (
+                <ArrowUpRight size={18} />
+              )}
             </button>
             <div role="status" aria-live="polite" className="form-status">
-              {status && (
-                <p>
-                  <Check size={17} />
-                  {status}
-                </p>
-              )}
+              <AnimatePresence>
+                {result && (
+                  <motion.div
+                    className="form-success"
+                    initial={reduce ? false : { opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: reduce ? 0 : 0.2 }}
+                  >
+                    <span className="success-icon">
+                      <Check size={19} />
+                    </span>
+                    <div>
+                      <strong>
+                        {result.mode === "demo"
+                          ? "Demo complete. Your message is ready."
+                          : "Message sent. Thank you!"}
+                      </strong>
+                      <p>
+                        {result.mode === "demo"
+                          ? "No email was sent. You can keep a copy of your message below."
+                          : "I'll get back to you as soon as I can."}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-            {draft && (
-              <button
-                className="text-link"
-                type="button"
-                onClick={async () => {
-                  try {
-                    await navigator.clipboard.writeText(draft);
-                    setStatus("Draft copied. No message has been sent.");
-                  } catch {
-                    setStatus(
-                      "Copy is unavailable. Select and copy the draft below.",
-                    );
-                  }
-                }}
-              >
-                <Copy size={16} /> Copy message draft
-              </button>
+            {error && (
+              <p className="submit-error" role="alert">
+                {error}
+              </p>
             )}
-            {draft && (
-              <details className="draft-details">
-                <summary>View message draft</summary>
-                <pre>{draft}</pre>
-              </details>
+            {result?.draft && (
+              <div className="message-draft">
+                <CopyButton value={result.draft} label="Copy message draft" />
+                <details className="draft-details">
+                  <summary>View message draft</summary>
+                  <pre>{result.draft}</pre>
+                </details>
+              </div>
             )}
           </form>
         </Reveal>

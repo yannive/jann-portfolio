@@ -9,6 +9,7 @@ import Process from "./components/Process";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import ScrollTools from "./components/ScrollTools";
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
@@ -16,6 +17,7 @@ export default function App() {
         Skip to content
       </a>
       <Navbar />
+      <ScrollTools />
       <main id="main">
         <Hero />
         <Projects />
