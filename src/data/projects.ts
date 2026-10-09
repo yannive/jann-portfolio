@@ -3,6 +3,11 @@ export type Project = {
   title: string;
   shortTitle: string;
   category: string;
+  featured?: boolean;
+  organization?: string;
+  status?: "In Development";
+  algorithms?: { name: string; description: string }[];
+  video?: { src: string; caption: string; captions?: string };
   description: string;
   tech: string[];
   features: string[];
@@ -14,7 +19,7 @@ export type Project = {
   solution: string;
   role?: string;
   process?: { title: string; description: string }[];
-  screenshots?: { src: string; alt: string; caption: string }[];
+  screenshots?: { src: string; alt: string; caption: string; placeholder?: boolean }[];
 };
 export const projectFilters = [
   "All",
@@ -28,17 +33,30 @@ export type ProjectFilter = (typeof projectFilters)[number];
 export const projects: Project[] = [
   {
     id: "shawarma",
+    featured: true,
+    status: "In Development",
+    algorithms: [{ name: "First Expired, First Out (FEFO)", description: "Prioritize batches by expiration date so stock approaching expiry can be used first." }],
+    screenshots: [
+      { src: `${import.meta.env.BASE_URL}images/projects/shawarma-overview.svg`, alt: "Placeholder for the Shawarma Shack inventory overview", caption: "Inventory overview — placeholder, actual screenshot pending.", placeholder: true },
+      { src: `${import.meta.env.BASE_URL}images/projects/shawarma-batches.svg`, alt: "Placeholder for expiration and batch prioritization", caption: "Expiration monitoring and FEFO — placeholder, actual screenshot pending.", placeholder: true },
+    ],
+    process: [
+      { title: "Inventory requirements", description: "Define product monitoring, stock quantity, expiration, and batch prioritization requirements." },
+      { title: "Data and interface design", description: "Model products and batches in MySQL, and plan clear inventory and expiration views." },
+      { title: "Implementation", description: "Build inventory workflows with PHP and CodeIgniter 4, incorporating FEFO batch ordering." },
+      { title: "Validation and handover", description: "Plan checks for stock updates, expiration boundaries, and batch ordering before preparing documentation and delivery." },
+    ],
     filters: ["Web Development", "Client Projects", "System Development"],
     problem:
       "Staff need a clear way to track stock across batches, deliveries, transfers, and expiration dates, including which items should be used first.",
     solution:
       "Bring stock movements and expiration status into one inventory workspace, with alerts, role-based access, and first-expiry-first-out stock handling.",
-    title: "Shawarma Shack Inventory Management System",
+    title: "Shawarma Shack Inventory System",
     shortTitle: "Shawarma Shack",
-    category: "Client project / Inventory system",
+    category: "Client Project",
     description:
-      "A web-based inventory management system designed to monitor stock levels, product batches, deliveries, transfers, and expiration dates. The system helps staff identify expired, expiring, and fresh inventory while supporting efficient stock movement.",
-    tech: ["CodeIgniter 4", "PHP", "MySQL", "Bootstrap", "JavaScript"],
+      "A web-based inventory management system focused on product monitoring, stock quantities, expiration dates, and batch prioritization.",
+    tech: ["PHP", "CodeIgniter 4", "MySQL"],
     features: [
       "Inventory tracking",
       "Batch tracking",
@@ -53,6 +71,23 @@ export const projects: Project[] = [
   },
   {
     id: "electrodesk",
+    featured: true,
+    organization: "MR-PRIDE Electrical Supplies",
+    status: "In Development",
+    algorithms: [
+      { name: "Simple Moving Average (SMA)", description: "Use averages of recent historical demand to support demand forecasting and purchasing decisions." },
+      { name: "Analytic Hierarchy Process (AHP)", description: "Support inventory prioritization through structured comparisons of decision criteria." },
+    ],
+    screenshots: [
+      { src: `${import.meta.env.BASE_URL}images/projects/electrodesk-overview.svg`, alt: "Placeholder for the MRP ElectroDesk operations overview", caption: "Inventory, sales, and purchasing — placeholder, actual screenshot pending.", placeholder: true },
+      { src: `${import.meta.env.BASE_URL}images/projects/electrodesk-forecast.svg`, alt: "Placeholder for demand forecasting and prioritization", caption: "SMA forecasting and AHP prioritization — placeholder, actual screenshot pending.", placeholder: true },
+    ],
+    process: [
+      { title: "Requirements and scope", description: "Map inventory, sales, purchasing, and forecasting needs for the academic capstone." },
+      { title: "System and interface design", description: "Plan the MySQL data model, Laravel application structure, and Vue.js interfaces styled with Tailwind CSS." },
+      { title: "Development and decision support", description: "Develop operational workflows and Chart.js visualizations, integrating SMA forecasts and AHP prioritization." },
+      { title: "Evaluation and documentation", description: "Plan workflow testing and algorithm checks with sample data, then prepare capstone documentation and delivery materials." },
+    ],
     filters: ["Web Development", "School Projects", "System Development"],
     problem:
       "Inventory decisions depend on information from sales, purchasing, quotations, and accounting. These business activities need a shared view alongside demand forecasts.",
@@ -60,16 +95,15 @@ export const projects: Project[] = [
       "Centralize business operations in MRP ElectroDesk, using Simple Moving Average forecasting and AHP prioritization to support inventory decisions.",
     title: "MRP ElectroDesk",
     shortTitle: "MRP ElectroDesk",
-    category: "Capstone / Business management",
+    category: "Academic Capstone Project",
     description:
-      "An AHP-based inventory and demand forecasting system developed for MR-PRIDE Electrical Supplies. The platform centralizes inventory, purchasing, sales, quotations, accounting, and business analytics.",
+      "A web-based inventory, sales, purchasing, and demand forecasting system for MR-PRIDE Electrical Supplies.",
     tech: [
       "Vue.js",
       "Laravel",
       "Tailwind CSS",
       "MySQL",
       "Chart.js",
-      "REST API",
     ],
     features: [
       "Inventory management",

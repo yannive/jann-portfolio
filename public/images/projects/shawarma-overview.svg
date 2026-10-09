@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title description">
+<title id="title">Shawarma Shack — Inventory overview placeholder</title>
+<desc id="description">Illustrative layout only. Actual screenshot pending. No client data.</desc>
+<rect width="1200" height="720" rx="20" fill="#eceee5"/>
+<rect x="40" y="40" width="1120" height="640" rx="16" fill="#fffef9" stroke="#dadcd1"/>
+<path d="M40 134H1160" stroke="#dadcd1"/>
+<g font-family="Arial, sans-serif" fill="#292d26">
+<text x="80" y="99" font-size="27" font-weight="bold">Shawarma Shack</text>
+<text x="820" y="98" font-size="16" fill="#56683d">SCREENSHOT PLACEHOLDER</text>
+<text x="80" y="193" font-size="32">Inventory overview</text>
+<text x="80" y="226" font-size="17" fill="#666b61">Planned interface view · In development</text>
+<g fill="#f7f7f2" stroke="#dadcd1"><rect x="80" y="267" width="330" height="120" rx="10"/><rect x="435" y="267" width="330" height="120" rx="10"/><rect x="790" y="267" width="330" height="120" rx="10"/><rect x="80" y="415" width="1040" height="170" rx="10"/></g>
+<g font-size="21"><text x="103" y="308">Products</text><text x="458" y="308">Stock quantities</text><text x="813" y="308">Batch monitoring</text></g>
+<g fill="#dadcd1"><rect x="103" y="336" width="170" height="12" rx="6"/><rect x="458" y="336" width="170" height="12" rx="6"/><rect x="813" y="336" width="170" height="12" rx="6"/><rect x="105" y="449" width="990" height="12" rx="6"/><rect x="105" y="488" width="830" height="12" rx="6"/><rect x="105" y="527" width="910" height="12" rx="6"/></g>
+<text x="80" y="636" font-size="18" fill="#666b61">Actual screenshot pending. Illustrative layout only — no client data.</text>
+</g></svg>

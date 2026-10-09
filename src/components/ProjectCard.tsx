@@ -13,6 +13,8 @@ export default function ProjectCard({
   onOpen: (project: Project) => void;
 }) {
   const reduce = useReducedMotion();
+  const cover = project.image || project.screenshots?.[0]?.src;
+  const placeholderCover = !project.image && project.screenshots?.[0]?.placeholder;
   return (
     <motion.article
       className={`project project-${project.id}`}
@@ -26,12 +28,15 @@ export default function ProjectCard({
         onClick={() => onOpen(project)}
         aria-label={`View ${project.title}`}
       >
-        {project.image ? (
+        {cover ? (
+          <>
           <img
-            src={project.image}
-            alt={`${project.title} screenshot`}
+            src={cover}
+            alt={project.image ? `${project.title} screenshot` : project.screenshots?.[0]?.alt}
             loading="lazy"
           />
+          {placeholderCover && <span className="preview-label">SCREENSHOT PLACEHOLDER</span>}
+          </>
         ) : (
           <>
             <ProjectPreview id={project.id} />
@@ -52,10 +57,16 @@ export default function ProjectCard({
         <span>{project.category}</span>
         <span>{String(index + 1).padStart(2, "0")}</span>
       </div>
+      {(project.featured || project.status) && (
+        <div className="project-badges">
+          {project.featured && <span>Featured project</span>}
+          {project.status && <span className="project-status">{project.status}</span>}
+        </div>
+      )}
       <div className="project-title">
         <h3>{project.shortTitle}</h3>
-        <button className="text-link" onClick={() => onOpen(project)}>
-          View Project <ArrowUpRight size={17} />
+        <button className="text-link" onClick={() => onOpen(project)} aria-label={`View Project Details: ${project.title}`}>
+          View Project Details <ArrowUpRight size={17} />
         </button>
       </div>
       <p className="project-description">{project.description}</p>

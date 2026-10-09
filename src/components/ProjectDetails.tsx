@@ -13,7 +13,7 @@ import { processSteps } from "../data/process";
 import ProjectPreview from "./ProjectPreview";
 import { handleTabKeys } from "./Tabs";
 
-const tabs = ["Overview", "Features", "Screenshots", "Workflow"] as const;
+const tabs = ["Overview", "Features", "Screenshots", "Workflow", "Video"] as const;
 export default function ProjectDetails({
   project,
   onClose,
@@ -26,6 +26,7 @@ export default function ProjectDetails({
   const [slide, setSlide] = useState(0);
   const [imageFailed, setImageFailed] = useState(false);
   const reduce = useReducedMotion();
+  const visibleTabs = tabs.filter((item) => item !== "Video" || project?.featured || project?.video);
   useEffect(() => {
     setTab("Overview");
     setSlide(0);
@@ -82,6 +83,10 @@ export default function ProjectDetails({
               <X />
             </button>
             <h2 id="project-dialog-title">{project.title}</h2>
+            {(project.status || project.organization) && <div className="project-badges">
+              {project.status && <span className="project-status">{project.status}</span>}
+              {project.organization && <span>{project.organization}</span>}
+            </div>}
           </div>
           <div
             role="tablist"
@@ -89,7 +94,7 @@ export default function ProjectDetails({
             aria-label="Project details"
             onKeyDown={handleTabKeys}
           >
-            {tabs.map((item) => (
+            {visibleTabs.map((item) => (
               <button
                 key={item}
                 role="tab"
@@ -103,7 +108,7 @@ export default function ProjectDetails({
               </button>
             ))}
           </div>
-          {tabs.map((item) => (
+          {visibleTabs.map((item) => (
             <section
               key={item}
               role="tabpanel"
@@ -133,13 +138,12 @@ export default function ProjectDetails({
                           <p>{project.solution}</p>
                         </div>
                       </div>
-                      <div className="role-note">
+                      {project.role && <div className="role-note">
                         <h3>My role</h3>
                         <p>
-                          {project.role ||
-                            "A detailed breakdown of my contributions will be added here."}
+                          {project.role}
                         </p>
-                      </div>
+                      </div>}
                       <h3>Technologies used</h3>
                       <div className="tags">
                         {project.tech.map((tech) => (
@@ -151,7 +155,7 @@ export default function ProjectDetails({
                   {item === "Features" && (
                     <>
                       <h3>Main features</h3>
-                      <p>The core capabilities of {project.shortTitle}.</p>
+                      <p>{project.status ? "Planned and in-development capabilities" : "The core capabilities"} of {project.shortTitle}.</p>
                       <ul className="feature-list">
                         {project.features.map((feature) => (
                           <li key={feature}>
@@ -160,6 +164,12 @@ export default function ProjectDetails({
                           </li>
                         ))}
                       </ul>
+                      {project.algorithms && <>
+                        <h3>Algorithms & decision support</h3>
+                        <dl className="project-algorithms">{project.algorithms.map((algorithm) => <div key={algorithm.name}>
+                          <dt>{algorithm.name}</dt><dd>{algorithm.description}</dd>
+                        </div>)}</dl>
+                      </>}
                       <h3>Technology stack</h3>
                       <div className="tags">
                         {project.tech.map((tech) => (
@@ -171,14 +181,15 @@ export default function ProjectDetails({
                   {item === "Screenshots" && (
                     <>
                       <h3>Screenshots & interface</h3>
+                      {screenshots.some((screenshot) => "placeholder" in screenshot && screenshot.placeholder) && <p className="gallery-notice">These local placeholders show planned views, not actual application screenshots. No client records are displayed.</p>}
                       <figure className="screenshot-figure">
                         {screenshots.length > 0 && !imageFailed ? (
                           <motion.img
                             key={slide}
                             initial={{ opacity: reduce ? 1 : 0 }}
                             animate={{ opacity: 1 }}
-                            src={screenshots[slide].src}
-                            alt={screenshots[slide].alt}
+                            src={screenshots[slide]?.src}
+                            alt={screenshots[slide]?.alt}
                             onError={() => setImageFailed(true)}
                           />
                         ) : (
@@ -193,7 +204,7 @@ export default function ProjectDetails({
                           {imageFailed
                             ? "This screenshot is unavailable. An illustrative preview is shown instead."
                             : screenshots.length
-                              ? screenshots[slide].caption
+                              ? screenshots[slide]?.caption
                               : "Illustrative preview — actual project screenshots will be added here."}
                         </figcaption>
                       </figure>
@@ -221,6 +232,7 @@ export default function ProjectDetails({
                   {item === "Workflow" && (
                     <>
                       <h3>Development process</h3>
+                      {project.status && <p>This project is in development. The process below outlines the development plan; it does not imply that every stage is complete.</p>}
                       {!project.process && (
                         <p>
                           Project-specific milestones are coming soon. This is
@@ -246,6 +258,18 @@ export default function ProjectDetails({
                       </ol>
                     </>
                   )}
+                  {item === "Video" && <>
+                    <h3>Video demonstration</h3>
+                    {project.video ? <figure className="project-video">
+                      <video controls playsInline preload="none" aria-label={`${project.title} video demonstration`}>
+                        <source src={project.video.src} />
+                        {project.video.captions && <track kind="captions" src={project.video.captions} srcLang="en" label="English" default />}
+                        Your browser does not support video playback.
+                      </video>
+                      <figcaption>{project.video.caption}</figcaption>
+                      <a className="text-link" href={project.video.src} target="_blank" rel="noreferrer">Open video <ArrowUpRight size={16} /></a>
+                    </figure> : <div className="video-placeholder"><p>A video walkthrough will be added when it is available.</p><p>Explore the overview, features, and planned interface gallery in the meantime.</p></div>}
+                  </>}
                 </motion.div>
               )}
             </section>
