@@ -96,3 +96,38 @@
 @media (max-width: 560px) {
   .portrait > img { aspect-ratio: 1 / 1.1; }
 }
+
+/* Professional presentation and direct contact. */
+.hero h1 { font-size: clamp(38px, 4.5vw, 62px); line-height: 1.12; letter-spacing: -2.5px; }
+.hero h1 .serif { letter-spacing: -2.5px; }
+.hero-photo { transform: none; box-shadow: 0 16px 40px var(--shadow); }
+.hero-note { font-family: inherit; font-style: normal; font-size: 11px; letter-spacing: .6px; }
+.hero-socials .socials-labeled { flex-wrap: wrap; gap: 8px; }
+.hero-socials .socials-labeled a { width: auto; height: auto; min-height: 42px; padding: 10px 12px; font-size: 12px; }
+.direct-contact { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(32px, 6vw, 80px); }
+.direct-contact > div { min-width: 0; }
+.direct-contact h2 { font-size: clamp(36px, 4.4vw, 58px); line-height: 1.12; letter-spacing: -2px; }
+.direct-contact h2 + p { max-width: 440px; font-size: 15px; line-height: 1.8; margin-top: 24px; }
+.direct-contact .availability { line-height: 1.7; font-size: 12px; }
+.contact-panel { background: var(--surface-raised); border: 1px solid var(--line); border-radius: 16px; padding: clamp(22px, 3vw, 36px); }
+.contact-panel h3 { font-size: 21px; letter-spacing: -.4px; }
+.contact-panel-intro { margin-top: 10px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+.contact-panel .contact-details { margin-top: 16px; }
+.contact-panel .contact-details > div { padding-block: 20px; }
+.contact-panel .contact-details dt { display: flex; align-items: center; gap: 9px; font-size: 12px; margin-bottom: 12px; }
+.contact-panel .contact-details dd { gap: 12px; }
+.contact-panel .contact-details dd > a { display: flex; align-items: center; gap: 10px; font-size: 15px; min-width: 0; min-height: 32px; }
+.contact-panel .contact-details dd > a svg { flex-shrink: 0; }
+.contact-social-heading { font-size: 12px; font-weight: 500; color: var(--muted); margin-top: 26px; }
+.direct-contact .socials-labeled { margin-top: 13px; gap: 8px; }
+.direct-contact .socials-labeled > a { min-height: 44px; padding: 10px 12px; font-size: 12px; }
+@media (max-width: 800px) {
+  .direct-contact { grid-template-columns: minmax(0, 1fr); }
+  .hero h1 { font-size: clamp(36px, 7vw, 56px); }
+}
+@media (max-width: 400px) {
+  .hero h1 { font-size: 34px; letter-spacing: -1.8px; }
+  .hero h1 .serif { letter-spacing: -1.8px; }
+  .contact-panel .contact-details dd > a { font-size: 13px; }
+  .direct-contact h2 { font-size: 34px; }
+}

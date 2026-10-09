@@ -52,7 +52,7 @@ export default function Hero() {
         </motion.div>
         <div className="hero-layout">
           <motion.div variants={entrance} className="hero-portrait">
-            <ProfilePhoto /><div className="hero-note"><span aria-hidden="true">&#8599;</span> Equal parts pixels &amp; problem-solving.</div>
+            <ProfilePhoto /><div className="hero-note">UI/UX Design &amp; Web Development</div>
           </motion.div>
           <div className="hero-copy">
             <motion.p variants={entrance} className="hero-intro">
@@ -66,13 +66,13 @@ export default function Hero() {
             >
               <h1>
                 <motion.span variants={entrance} className="headline-line">
-                  Good design.
+                  Thoughtful design.
                 </motion.span>{" "}
                 <motion.span variants={entrance} className="headline-line">
-                  Solid code.
+                  Purposeful code.
                 </motion.span>{" "}
                 <motion.span variants={entrance} className="headline-line">
-                  <span className="serif">Zero guesswork.</span>
+                  <span className="serif">Built for people.</span>
                 </motion.span>
               </h1>
             </motion.div>
@@ -86,24 +86,24 @@ export default function Hero() {
                 <a className="role-link" href="#projects">
                   Web Developer
                 </a>{" "}
-                turning complicated problems into interfaces that just make sense. Thoughtful on the outside. Reliable under the hood.
+                based in Manila. I design clear, accessible interfaces and develop responsive web applications that simplify everyday tasks.
               </p>
               <div className="hero-actions">
                 <a className="button primary" href="#projects">
                   Explore my work <ArrowUpRight size={18} />
                 </a>
                 <a className="button secondary" href="#contact">
-                  Let's talk <ArrowUpRight size={18} />
+                  Contact details <ArrowUpRight size={18} />
                 </a>
               </div>
             </motion.div>
             <motion.div variants={entrance} className="hero-socials">
-              <SocialLinks />
+              <SocialLinks showLabels />
             </motion.div>
           </div>
         </div>
         <motion.div variants={entrance} className="hero-foot">
-          <span>A LITTLE CURIOSITY. A LOT OF INTENTION.</span>
+          <span>UI/UX DESIGN &amp; WEB DEVELOPMENT</span>
           <a href="#projects">
             Scroll to explore <ArrowDown size={15} />
           </a>

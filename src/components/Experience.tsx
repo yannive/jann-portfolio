@@ -8,7 +8,7 @@ export default function Experience() {
         <SectionHeading
           number="06"
           label="EXPERIENCE & EDUCATION"
-          title="Always a work in progress."
+          title="Education & practical experience."
         />
         <div className="education-row">
           <div className="education-icon">
@@ -16,7 +16,7 @@ export default function Experience() {
           </div>
           <div>
             <p className="eyebrow">
-              EDUCATION <span> / {profile.educationYears}</span>
+              EDUCATION {profile.educationYears && <span> / {profile.educationYears}</span>}
             </p>
             <h3>National Teachers College</h3>
             <p>Bachelor of Science in Information Technology</p>

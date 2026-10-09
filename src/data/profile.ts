@@ -2,7 +2,7 @@ import { aboutImage } from "./profileImage";
 // Contact details live in contact.ts; portraits are configured in profileImage.ts.
 export const profile = {
   photo: aboutImage,
-  educationYears: "Years to be added",
+  educationYears: "",
 };
 export const experience: {
   title: string;

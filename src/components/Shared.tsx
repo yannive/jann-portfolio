@@ -66,11 +66,11 @@ export function ArrowLink({
     </a>
   );
 }
-export function SocialLinks({ showLabels = false }: { showLabels?: boolean }) {
+export function SocialLinks({ showLabels = false, socialOnly = false }: { showLabels?: boolean; socialOnly?: boolean }) {
   const icons = { Facebook, GitHub: Github, Instagram, Email: Mail, Phone };
   return (
     <div className={`socials ${showLabels ? "socials-labeled" : ""}`}>
-      {contactLinks.map(({ name, href, external }) => {
+      {contactLinks.filter((link) => !socialOnly || link.external).map(({ name, href, external }) => {
         const Icon = icons[name];
         return (
           <a

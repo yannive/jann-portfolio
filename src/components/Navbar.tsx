@@ -108,7 +108,7 @@ export default function Navbar() {
                 href="#contact"
                 onClick={() => navigate("contact")}
               >
-                Let's Talk <ArrowUpRight size={16} />
+                Reach me <ArrowUpRight size={16} />
               </a>
             </motion.div>
           )}
