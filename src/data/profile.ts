@@ -1,7 +1,7 @@
-import { profileImage } from "./profileImage";
-// Contact details live in contact.ts; the photo is shared by Hero and About.
+import { aboutImage } from "./profileImage";
+// Contact details live in contact.ts; portraits are configured in profileImage.ts.
 export const profile = {
-  photo: profileImage,
+  photo: aboutImage,
   educationYears: "Years to be added",
 };
 export const experience: {

@@ -23,12 +23,12 @@ export default function Projects() {
         <SectionHeading
           number="01"
           label="SELECTED WORK"
-          title="Ideas, brought to life."
+          title="Less talk. More making."
         >
           <p>
-            Explore the thinking behind the interface.
+            Real problems. Thoughtful solutions.
             <br />
-            Choose a project to look inside.
+            Take a look at what goes into the work.
           </p>
         </SectionHeading>
       </Reveal>

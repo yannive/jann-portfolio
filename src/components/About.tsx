@@ -26,7 +26,7 @@ export default function About() {
                 <span className="monogram">
                   jc<span>.</span>
                 </span>
-                <span className="photo-note">A LITTLE SPACE FOR MY PHOTO</span>
+                <span className="photo-note">CURIOUS MIND. HANDS-ON MAKER.</span>
               </div>
             )}
             <div className="portrait-caption">

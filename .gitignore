@@ -3,3 +3,6 @@ dist/
 *.tsbuildinfo
 .sites-runtime/
 .env
+.env.*
+!.env.example
+*.log

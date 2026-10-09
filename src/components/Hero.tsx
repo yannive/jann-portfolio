@@ -52,11 +52,11 @@ export default function Hero() {
         </motion.div>
         <div className="hero-layout">
           <motion.div variants={entrance} className="hero-portrait">
-            <ProfilePhoto />
+            <ProfilePhoto /><div className="hero-note"><span aria-hidden="true">&#8599;</span> Equal parts pixels &amp; problem-solving.</div>
           </motion.div>
           <div className="hero-copy">
             <motion.p variants={entrance} className="hero-intro">
-              Hi, I'm Jann.
+              JANN CIPRIANO / DESIGNER & DEVELOPER
             </motion.p>
             <motion.div
               style={{
@@ -66,13 +66,13 @@ export default function Hero() {
             >
               <h1>
                 <motion.span variants={entrance} className="headline-line">
-                  I design experiences
+                  Good design.
                 </motion.span>{" "}
                 <motion.span variants={entrance} className="headline-line">
-                  and build systems
+                  Solid code.
                 </motion.span>{" "}
                 <motion.span variants={entrance} className="headline-line">
-                  that <span className="serif">solve real problems.</span>
+                  <span className="serif">Zero guesswork.</span>
                 </motion.span>
               </h1>
             </motion.div>
@@ -86,15 +86,14 @@ export default function Hero() {
                 <a className="role-link" href="#projects">
                   Web Developer
                 </a>{" "}
-                focused on creating clean, intuitive, and functional digital
-                experiences.
+                turning complicated problems into interfaces that just make sense. Thoughtful on the outside. Reliable under the hood.
               </p>
               <div className="hero-actions">
                 <a className="button primary" href="#projects">
-                  View My Work <ArrowUpRight size={18} />
+                  Explore my work <ArrowUpRight size={18} />
                 </a>
                 <a className="button secondary" href="#contact">
-                  Contact Me <ArrowUpRight size={18} />
+                  Let's talk <ArrowUpRight size={18} />
                 </a>
               </div>
             </motion.div>
@@ -104,7 +103,7 @@ export default function Hero() {
           </div>
         </div>
         <motion.div variants={entrance} className="hero-foot">
-          <span>DESIGN WITH PURPOSE. BUILD WITH CARE.</span>
+          <span>A LITTLE CURIOSITY. A LOT OF INTENTION.</span>
           <a href="#projects">
             Scroll to explore <ArrowDown size={15} />
           </a>

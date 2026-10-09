@@ -4,6 +4,7 @@ import App from "./App";
 import "./styles.css";
 import "./interactions.css";
 import "./hero-contact.css";
+import "./polish.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />
