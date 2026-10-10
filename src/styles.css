@@ -332,6 +332,9 @@ summary:focus-visible {
   position: absolute;
   inset: 0;
 }
+.project-prediqueue .project-visual > img {
+  object-position: top;
+}
 .project-open {
   position: absolute;
   right: 16px;

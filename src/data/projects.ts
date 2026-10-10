@@ -37,8 +37,7 @@ export const projects: Project[] = [
     status: "In Development",
     algorithms: [{ name: "First Expired, First Out (FEFO)", description: "Prioritize batches by expiration date so stock approaching expiry can be used first." }],
     screenshots: [
-      { src: `${import.meta.env.BASE_URL}images/projects/shawarma-overview.svg`, alt: "Placeholder for the Shawarma Shack inventory overview", caption: "Inventory overview — placeholder, actual screenshot pending.", placeholder: true },
-      { src: `${import.meta.env.BASE_URL}images/projects/shawarma-batches.svg`, alt: "Placeholder for expiration and batch prioritization", caption: "Expiration monitoring and FEFO — placeholder, actual screenshot pending.", placeholder: true },
+      { src: `${import.meta.env.BASE_URL}images/projects/shawarma-dashboard.png`, alt: "Shawarma Shack dashboard showing warehouse status, stock levels, and expiration monitoring", caption: "Inventory dashboard and warehouse status." },
     ],
     process: [
       { title: "Inventory requirements", description: "Define product monitoring, stock quantity, expiration, and batch prioritization requirements." },
@@ -79,8 +78,7 @@ export const projects: Project[] = [
       { name: "Analytic Hierarchy Process (AHP)", description: "Support inventory prioritization through structured comparisons of decision criteria." },
     ],
     screenshots: [
-      { src: `${import.meta.env.BASE_URL}images/projects/electrodesk-overview.svg`, alt: "Placeholder for the MRP ElectroDesk operations overview", caption: "Inventory, sales, and purchasing — placeholder, actual screenshot pending.", placeholder: true },
-      { src: `${import.meta.env.BASE_URL}images/projects/electrodesk-forecast.svg`, alt: "Placeholder for demand forecasting and prioritization", caption: "SMA forecasting and AHP prioritization — placeholder, actual screenshot pending.", placeholder: true },
+      { src: `${import.meta.env.BASE_URL}images/projects/mr-pride-home.png`, alt: "MR-Pride Electrical Supplies homepage with product browsing and quotation requests", caption: "MR-Pride Electrical Supplies customer homepage." },
     ],
     process: [
       { title: "Requirements and scope", description: "Map inventory, sales, purchasing, and forecasting needs for the academic capstone." },
@@ -119,6 +117,9 @@ export const projects: Project[] = [
   },
   {
     id: "prediqueue",
+    screenshots: [
+      { src: `${import.meta.env.BASE_URL}images/projects/prediqueue-home.png`, alt: "PrediQueue homepage with cashier, registrar, and admission services and queue ticket instructions", caption: "PrediQueue service selection and queue ticket workflow." },
+    ],
     filters: ["Web Development", "System Development"],
     problem:
       "Students need visibility into their place in line, estimated waiting times, and service cut-offs at school offices.",
@@ -138,26 +139,6 @@ export const projects: Project[] = [
       "Next-day priority",
       "Notifications",
       "Admin dashboard",
-    ],
-  },
-  {
-    id: "commerce",
-    filters: ["Web Development"],
-    problem:
-      "Shoppers need a clear path from browsing products to viewing details and managing a cart, including on smaller screens.",
-    solution:
-      "Create a responsive shopping experience with product browsing, individual product pages, and an interactive cart.",
-    title: "E-Commerce Website",
-    shortTitle: "E-Commerce Website",
-    category: "Web development",
-    description:
-      "A responsive e-commerce website featuring product browsing, product details, shopping cart functionality, and mobile-friendly layouts.",
-    tech: ["HTML", "CSS", "JavaScript", "jQuery", "Bootstrap"],
-    features: [
-      "Product browsing",
-      "Product details",
-      "Shopping cart",
-      "Responsive layouts",
     ],
   },
 ];

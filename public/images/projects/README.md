@@ -1,6 +1,8 @@
 ﻿# Project media
 
-The four SVG files in this folder are local, illustrative placeholders, not actual screenshots. They contain no client records.
+shawarma-dashboard.png, mr-pride-home.png, and prediqueue-home.png are the supplied project screenshots used in the Works cards and screenshot galleries.
+
+The four SVG files are unused illustrative placeholders.
 
 To add screenshots, place approved images here and update the corresponding `screenshots` entries in `src/data/projects.ts`. Set `placeholder: false`, and update the alt text and caption. Keep the `${import.meta.env.BASE_URL}images/projects/...` prefix for Vite base-path compatibility.
 

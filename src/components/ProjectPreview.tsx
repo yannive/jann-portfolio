@@ -2,7 +2,6 @@ import {
   BarChart3,
   Boxes,
   LayoutDashboard,
-  ShoppingBag,
   Zap,
 } from "lucide-react";
 export default function ProjectPreview({ id }: { id: string }) {
@@ -36,37 +35,6 @@ export default function ProjectPreview({ id }: { id: string }) {
             </span>
           </div>
         </div>
-      </div>
-    );
-  if (id === "commerce")
-    return (
-      <div className="shop-preview" aria-hidden="true">
-        <div className="shop-nav">
-          <b>
-            everyday<span> objects.</span>
-          </b>
-          <span>Shop / About</span>
-          <ShoppingBag size={15} />
-        </div>
-        <div className="shop-copy">
-          <small>THOUGHTFULLY SELECTED</small>
-          <h4>
-            Simple things.
-            <br />
-            <i>Better days.</i>
-          </h4>
-          <span className="shop-button">Explore the collection ↗</span>
-        </div>
-        <div className="still-life">
-          <div className="vase">
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="book" />
-          <div className="cup" />
-        </div>
-        <div className="shop-caption">Objects that feel at home.</div>
       </div>
     );
   const electro = id === "electrodesk";
