@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Figma, Github } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { type Project } from "../data/projects";
 import ProjectPreview from "./ProjectPreview";
@@ -15,6 +15,32 @@ export default function ProjectCard({
   const reduce = useReducedMotion();
   const cover = project.image || project.screenshots?.[0]?.src;
   const placeholderCover = !project.image && project.screenshots?.[0]?.placeholder;
+  if (project.figmaUrl) {
+    return (
+      <motion.article
+        className={`project project-${project.id}`}
+        initial={reduce ? false : { opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.06 }}
+        transition={{ duration: 0.4 }}
+      >
+        <a className="project-visual figma-cover" href={project.figmaUrl} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} in Figma (new tab)`}>
+          <Figma size={48} aria-hidden="true" />
+          <span className="eyebrow">FIGMA DESIGN</span>
+          <strong>{project.title}</strong>
+          <span>Explore the design in Figma</span>
+          <span className="project-open"><ArrowUpRight size={24} /></span>
+        </a>
+        <div className="project-meta"><span>{project.category}</span><span>{String(index + 1).padStart(2, "0")}</span></div>
+        <div className="project-title">
+          <h3>{project.shortTitle}</h3>
+          <a className="text-link" href={project.figmaUrl} target="_blank" rel="noreferrer">View in Figma <ArrowUpRight size={17} /></a>
+        </div>
+        <p className="project-description">{project.description}</p>
+        <div className="tags">{project.tech.map((tech) => <span key={tech}>{tech}</span>)}</div>
+      </motion.article>
+    );
+  }
   return (
     <motion.article
       className={`project project-${project.id}`}

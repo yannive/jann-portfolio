@@ -14,6 +14,7 @@ export type Project = {
   image?: string;
   github?: string;
   liveUrl?: string;
+  figmaUrl?: string;
   filters: ProjectFilter[];
   problem: string;
   solution: string;
@@ -31,6 +32,19 @@ export const projectFilters = [
 ] as const;
 export type ProjectFilter = (typeof projectFilters)[number];
 export const projects: Project[] = [
+  {
+    id: "axis-ryu",
+    title: "AXIS_Ryu",
+    shortTitle: "AXIS_Ryu",
+    category: "UI/UX Design",
+    description: "A design project created in Figma. Open the design file to explore the work.",
+    tech: ["Figma", "UI/UX Design"],
+    filters: ["UI/UX"],
+    features: [],
+    problem: "",
+    solution: "",
+    figmaUrl: "https://www.figma.com/design/2gJQgNuPRzqg4IedVHF6q3/AXIS_Ryu?node-id=0-1",
+  },
   {
     id: "shawarma",
     featured: true,
