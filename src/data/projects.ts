@@ -34,8 +34,8 @@ export type ProjectFilter = (typeof projectFilters)[number];
 export const projects: Project[] = [
   {
     id: "axis-ryu",
-    title: "AXIS_Ryu",
-    shortTitle: "AXIS_Ryu",
+    title: "AXIS",
+    shortTitle: "AXIS",
     category: "UI/UX Design",
     description: "A design project created in Figma. Open the design file to explore the work.",
     tech: ["Figma", "UI/UX Design"],
