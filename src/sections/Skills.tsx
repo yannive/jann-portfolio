@@ -2,7 +2,8 @@ import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { skills, skillDescriptions } from "../data/skills";
-import { Reveal, SectionHeading } from "./Shared";
+import { Reveal } from "../components/common/Reveal";
+import { SectionHeading } from "../components/common/SectionHeading";
 
 function SkillGroup({
   group,

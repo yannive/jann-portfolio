@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import ThemeToggle from "./ThemeToggle";
-import { useMediaQuery } from "../hooks/useMediaQuery";
+import ThemeToggle from "../common/ThemeToggle";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const links = ["Home", "About", "Projects", "Skills", "Experience", "Contact"];
 export default function Navbar() {

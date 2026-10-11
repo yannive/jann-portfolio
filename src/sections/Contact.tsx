@@ -1,7 +1,8 @@
 ﻿import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import { contactInfo } from "../data/contact";
-import { Reveal, SocialLinks } from "./Shared";
-import CopyButton from "./CopyButton";
+import { Reveal } from "../components/common/Reveal";
+import { SocialLinks } from "../components/common/SocialLinks";
+import CopyButton from "../components/common/CopyButton";
 
 export default function Contact() {
   return (

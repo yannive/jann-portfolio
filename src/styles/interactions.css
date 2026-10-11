@@ -519,10 +519,6 @@ button:disabled {
 .gallery-placeholder > .queue-preview {
   height: 300px;
 }
-.gallery-placeholder > .shop-preview {
-  max-width: 430px;
-  height: 280px;
-}
 .gallery-controls {
   display: flex;
   align-items: center;
@@ -734,105 +730,6 @@ button:disabled {
   color: var(--error);
   margin-top: 6px;
 }
-.contact-fields {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 23px;
-  padding: 0;
-  border: 0;
-  margin: 0;
-  min-width: 0;
-}
-.field-subject,
-.field-message {
-  grid-column: 1 / -1;
-}
-.form-field {
-  min-width: 0;
-}
-.contact-form .form-field label {
-  margin: 0 0 12px;
-  font-size: 10px;
-}
-.contact-form input,
-.contact-form textarea {
-  transition:
-    border-color 0.2s,
-    background-color 0.2s;
-}
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-bottom-color: var(--olive);
-  background-color: var(--shadow);
-}
-.contact-form input[aria-invalid="true"],
-.contact-form textarea[aria-invalid="true"] {
-  border-bottom-color: var(--error);
-}
-.field-feedback {
-  min-height: 33px;
-  padding: 5px 0 7px;
-}
-.field-feedback span {
-  display: flex;
-  gap: 5px;
-  color: var(--error);
-  font-size: 10px;
-  line-height: 1.5;
-}
-.field-feedback svg {
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-.form-success {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-top: 18px;
-  padding: 17px;
-  background: var(--success-bg);
-  border-radius: 4px;
-}
-.success-icon {
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: var(--olive);
-  border: 1px solid var(--olive);
-}
-.form-success strong {
-  font-size: 12px;
-  font-weight: 500;
-}
-.form-success p {
-  font-size: 11px;
-  line-height: 1.7;
-  margin-top: 6px;
-  color: var(--muted);
-}
-.form-status .success-icon svg {
-  margin: 0;
-}
-.submit-error {
-  color: var(--error);
-  font-size: 12px;
-  margin-top: 15px;
-  line-height: 1.7;
-}
-.message-draft {
-  margin-top: 17px;
-}
-.loading-spinner {
-  animation: spin 0.8s linear infinite;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
 .socials > a {
   min-width: 30px;
   min-height: 30px;
@@ -879,9 +776,6 @@ button:disabled {
 [data-theme="dark"] .project-electrodesk .project-visual {
   background: #343d34;
 }
-[data-theme="dark"] .project-commerce .project-visual {
-  background: #413d31;
-}
 [data-theme="dark"] .project-prediqueue .project-visual {
   background: #36432c;
 }
@@ -907,7 +801,6 @@ button:disabled {
 [data-theme="dark"] .about-copy > p:not(.about-lead),
 [data-theme="dark"] .contact-grid h2 + p,
 [data-theme="dark"] .contact-placeholder,
-[data-theme="dark"] .form-note,
 [data-theme="dark"] .row-index,
 [data-theme="dark"] .social-placeholder {
   color: var(--muted);
@@ -922,18 +815,6 @@ button:disabled {
 [data-theme="dark"] .education-icon {
   background: #34452a;
   color: #c3d8a4;
-}
-[data-theme="dark"] .contact-form input,
-[data-theme="dark"] .contact-form textarea {
-  border-bottom-color: #68795b;
-}
-[data-theme="dark"] .contact-form input::placeholder,
-[data-theme="dark"] .contact-form textarea::placeholder {
-  color: #b5bfa9;
-}
-[data-theme="dark"] .contact-form input[aria-invalid="true"],
-[data-theme="dark"] .contact-form textarea[aria-invalid="true"] {
-  border-bottom-color: var(--error);
 }
 [data-theme="dark"] .availability > span,
 [data-theme="dark"] .status-dot {
@@ -1029,9 +910,6 @@ button:disabled {
   .detail-footer {
     padding-inline: 26px;
   }
-  .contact-fields {
-    grid-template-columns: 1fr;
-  }
   .email-row {
     gap: 10px;
   }
@@ -1106,19 +984,6 @@ button:disabled {
   .process-tabs button svg {
     display: none;
   }
-  .contact-fields {
-    grid-template-columns: 1fr 1fr;
-    gap: 0 15px;
-  }
-  .contact-form .form-field label {
-    font-size: 11px;
-  }
-  .field-feedback {
-    min-height: 44px;
-  }
-  .field-feedback span {
-    font-size: 9px;
-  }
   .project-dialog {
     width: calc(100% - 20px);
     max-height: 92dvh;
@@ -1169,9 +1034,6 @@ button:disabled {
   }
   .gallery-placeholder > .queue-preview {
     height: 265px;
-  }
-  .gallery-placeholder > .shop-preview {
-    height: 255px;
   }
   .screenshot-figure > img {
     height: 260px;

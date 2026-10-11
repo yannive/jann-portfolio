@@ -1,6 +1,6 @@
 import { ArrowUpRight, Figma, Github } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { type Project } from "../data/projects";
+import { type Project } from "../../data/projects";
 import ProjectPreview from "./ProjectPreview";
 
 export default function ProjectCard({

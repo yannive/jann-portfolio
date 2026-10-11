@@ -1,5 +1,6 @@
 import { PenTool, Code2, Layers3, ArrowUpRight } from "lucide-react";
-import { Reveal, SectionHeading } from "./Shared";
+import { Reveal } from "../components/common/Reveal";
+import { SectionHeading } from "../components/common/SectionHeading";
 const services = [
   {
     title: "UI/UX Design",

@@ -1,5 +1,5 @@
 import { ArrowUp } from "lucide-react";
-import { SocialLinks } from "./Shared";
+import { SocialLinks } from "../common/SocialLinks";
 export default function Footer() {
   return (
     <footer className="container footer">

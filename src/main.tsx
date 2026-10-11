@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./styles.css";
-import "./interactions.css";
-import "./hero-contact.css";
-import "./polish.css";
+import "./styles/styles.css";
+import "./styles/interactions.css";
+import "./styles/hero-contact.css";
+import "./styles/polish.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />

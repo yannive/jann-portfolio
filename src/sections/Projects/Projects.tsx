@@ -5,8 +5,9 @@ import {
   projectFilters,
   type Project,
   type ProjectFilter,
-} from "../data/projects";
-import { Reveal, SectionHeading } from "./Shared";
+} from "../../data/projects";
+import { Reveal } from "../../components/common/Reveal";
+import { SectionHeading } from "../../components/common/SectionHeading";
 import ProjectCard from "./ProjectCard";
 import ProjectDetails from "./ProjectDetails";
 

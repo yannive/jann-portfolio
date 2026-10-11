@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { profileImage } from "../data/profileImage";
+import { profileImage } from "../../data/profileImage";
 
 export default function ProfilePhoto() {
   const [failed, setFailed] = useState(false);

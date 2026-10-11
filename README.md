@@ -1,56 +1,67 @@
 # Jann Eirich Cipriano — Portfolio
 
-A responsive React, TypeScript, Tailwind CSS and Vite portfolio. Includes Framer Motion, Lucide icons, project filters and case-study tabs, interactive skills and process steps, saved light/dark themes, scroll progress, and a frontend demo contact form.
+React + TypeScript + Vite portfolio with Tailwind CSS, Framer Motion, and Lucide icons. Includes themes, project filters, Figma links, native project dialogs, interactive skills/process steps, and direct contact links with copy controls.
 
-## Run locally
+## Development
 
 ```sh
-npm install
+npm ci
 npm run dev
-```
-
-On Windows PowerShell with script execution restricted, use `npm.cmd` instead of `npm`.
-
-```sh
+npm run typecheck
 npm run build
 npm run preview
 ```
 
-`build` runs strict TypeScript checking before generating `dist/`.
+Use `npm.cmd` if PowerShell blocks npm scripts. The build also runs strict TypeScript checks and generates `dist/`. No lint script is configured.
 
-## Personalize
+## Structure
 
-- `src/data/contact.ts`: edit the email, phone, Facebook, GitHub, and Instagram details in one place. The Hero, Contact section, and Footer share these values. Social profiles open in new tabs; email and phone use `mailto:` and `tel:`.
-- `src/assets/profile.jpg`: add your actual photo here. The Hero and About section automatically load this file; until it exists, an initials placeholder is shown. The Hero uses a responsive rounded container and `object-fit: cover`. See `src/assets/README.md` for the optional direct-import version.
-- `src/data/profile.ts`: edit education years, work experience, internships, and certifications. Add freelance, internship, and client experience to the `experience` array.
-- `src/data/projects.ts`: edit project records, filter categories, problem and solution summaries. Add `role` and `process` when your specific contributions and milestones are ready. Optional `image`, `github`, and `liveUrl` fields connect screenshots and working links. Put images in `public/projects/`. Current previews are illustrative HTML/CSS compositions, not actual screenshots. The UI/UX filter intentionally has an empty state until a case study is added.
-- `src/data/skills.ts`: maintain skill groups and their interactive usage descriptions.
-- `src/data/process.ts`: edit the six workflow stages and outcomes.
-- `src/styles.css`: base responsive layout. `src/interactions.css`: theme tokens, dark palette, interaction states, and responsive details. Tailwind utilities remain available throughout JSX.
-- `src/lib/contact.ts`: validation and submission adapter. It currently simulates an 850 ms request and returns `mode: "demo"`; nothing is delivered or stored. Replace the delay with your Formspree, EmailJS, or Laravel/API integration, throw on failure, and return `mode: "sent"` only after the provider confirms success. The UI handles loading, errors, success, and a copyable draft. Validate and protect the real endpoint server-side; keep private credentials off the frontend.
-- `index.html`: SEO and social metadata. Add your final canonical URL when publicly deployed.
-
-The Hero places the photo beside the introduction on desktop and above it on mobile. `src/hero-contact.css` contains its layout and contact-link styling. Native dialogs support Escape, focus trapping, and return focus to the launching button. Reduced motion is respected by both CSS and Framer Motion.
-
-The email and phone copy controls use `contactInfo` and show “Copied!” briefly after successful clipboard writes. They explain how to copy manually if clipboard access fails. Only the theme preference is saved in localStorage (`jann-theme`); form contents are not persisted. The initial theme follows the device and keeps following device changes until the visitor chooses a theme.
-
-### Add project screenshots
-
-Add a `screenshots` array to any project. The detail view automatically displays previous/next controls when there is more than one image:
-
-```ts
-screenshots: [
-  { src: "/projects/inventory-overview.webp", alt: "Inventory dashboard showing stock levels", caption: "Inventory overview" },
-  { src: "/projects/inventory-batches.webp", alt: "Batch list organized by expiration date", caption: "Batch tracking" },
-],
-role: "Replace with your actual responsibilities.",
-process: [
-  { title: "Discovery", description: "Replace with your actual project work." },
-],
+```text
+public/
+  favicon.svg
+  images/projects/
+docs/
+  assets.md
+src/
+  assets/                    Portraits fingerprinted by Vite
+  components/
+    common/                  Reveal, SectionHeading, SocialLinks, CopyButton, ThemeToggle
+    layout/                  Navbar, Footer, ScrollTools
+  sections/
+    Hero/                    Hero and ProfilePhoto
+    Projects/                List, cards, dialog, panels, gallery, illustrative previews
+    About.tsx
+    Contact.tsx
+    Experience.tsx
+    Process.tsx
+    Services.tsx
+    Skills.tsx
+  data/                      Portfolio content and image references
+  hooks/                     useMediaQuery
+  styles/                    Base, interactions, hero/contact, polish
+  utils/                     Tab keyboard navigation
+  App.tsx                    Section order and motion preferences
+  main.tsx                   React entry and stylesheet order
 ```
 
-Tabs support Left/Right, Home/End and Enter/Space. Skill descriptions respond to hover, focus and tap. All important interactions remain available with reduced motion and on touch devices; no custom cursor replaces the native pointer.
+Preserve the CSS import order in `main.tsx`: base, interactions, hero/contact, polish. Later layers intentionally override earlier rules.
+
+## Maintaining content
+
+- `src/data/contact.ts`: shared email, phone, and social links. The formatted phone label also lives in `src/sections/Contact.tsx`. There is no contact form/backend; links open email, phone, and social destinations.
+- `src/data/projects.ts`: project records, filters, screenshots, Figma links, optional GitHub/live URLs, and workflows. AXIS opens Figma; other cards open dialogs. See [assets](docs/assets.md).
+- `src/data/profile.ts`: education, experience, and certifications. Empty arrays hide optional entries.
+- `src/data/skills.ts`: skill labels and descriptions. Android Studio remains portfolio content, not an app dependency.
+- `src/data/process.ts`: the general workflow.
+- `src/data/profileImage.ts`: required portrait imports. Replace `src/assets/profile.jpg` for Hero or `about-portrait.jpg` for About.
+- Section components: introduction, About copy, services, and other small related content.
+
+Dialogs retain keyboard tabs, Escape dismissal, scroll locking, and focus restoration. Gallery state remains in the dialog so tab switches preserve the selected slide. Reduced motion and mobile pointer behavior are retained. Only the theme choice is stored in localStorage (`jann-theme`).
 
 ## Deployment
 
-The generated `dist/` folder is a static website and can be deployed to a static host. Sites project identity lives in `.openai/hosting.json`. Its initial audience is private; update sharing when ready for clients and recruiters.
+The existing Cloudflare Pages build command is compatible with `npm run build`, output `dist/`. The local `portfolio` directory is the Git repository root; do not infer a dashboard root-directory change from the enclosing workspace. Actual dashboard settings and the live domain are not recorded here.
+
+`.openai/hosting.json` contains separate Sites hosting metadata and is preserved. Review this local branch before pushing: a push to a deployment branch may trigger your existing integration. This cleanup does not require DNS or GitHub settings changes.
+
+Keep secrets out of frontend code and `VITE_*` variables, which are public when bundled. `.gitignore` excludes environment files, dependencies, output, logs, and TypeScript build metadata. Documentation belongs outside `public/`, which Vite copies into the production output.

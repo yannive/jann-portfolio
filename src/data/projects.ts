@@ -51,7 +51,7 @@ export const projects: Project[] = [
     status: "In Development",
     algorithms: [{ name: "First Expired, First Out (FEFO)", description: "Prioritize batches by expiration date so stock approaching expiry can be used first." }],
     screenshots: [
-      { src: `${import.meta.env.BASE_URL}images/projects/shawarma-dashboard.png`, alt: "Shawarma Shack dashboard showing warehouse status, stock levels, and expiration monitoring", caption: "Inventory dashboard and warehouse status." },
+      { src: `${import.meta.env.BASE_URL}images/projects/shawarma-dashboard.webp`, alt: "Shawarma Shack dashboard showing warehouse status, stock levels, and expiration monitoring", caption: "Inventory dashboard and warehouse status." },
     ],
     process: [
       { title: "Inventory requirements", description: "Define product monitoring, stock quantity, expiration, and batch prioritization requirements." },
@@ -92,7 +92,7 @@ export const projects: Project[] = [
       { name: "Analytic Hierarchy Process (AHP)", description: "Support inventory prioritization through structured comparisons of decision criteria." },
     ],
     screenshots: [
-      { src: `${import.meta.env.BASE_URL}images/projects/mr-pride-home.png`, alt: "MR-Pride Electrical Supplies homepage with product browsing and quotation requests", caption: "MR-Pride Electrical Supplies customer homepage." },
+      { src: `${import.meta.env.BASE_URL}images/projects/mr-pride-home.webp`, alt: "MR-Pride Electrical Supplies homepage with product browsing and quotation requests", caption: "MR-Pride Electrical Supplies customer homepage." },
     ],
     process: [
       { title: "Requirements and scope", description: "Map inventory, sales, purchasing, and forecasting needs for the academic capstone." },
@@ -132,7 +132,7 @@ export const projects: Project[] = [
   {
     id: "prediqueue",
     screenshots: [
-      { src: `${import.meta.env.BASE_URL}images/projects/prediqueue-home.png`, alt: "PrediQueue homepage with cashier, registrar, and admission services and queue ticket instructions", caption: "PrediQueue service selection and queue ticket workflow." },
+      { src: `${import.meta.env.BASE_URL}images/projects/prediqueue-home.webp`, alt: "PrediQueue homepage with cashier, registrar, and admission services and queue ticket instructions", caption: "PrediQueue service selection and queue ticket workflow." },
     ],
     filters: ["Web Development", "System Development"],
     problem:

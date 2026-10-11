@@ -2,8 +2,9 @@ import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { processSteps } from "../data/process";
-import { Reveal, SectionHeading } from "./Shared";
-import { handleTabKeys } from "./Tabs";
+import { Reveal } from "../components/common/Reveal";
+import { SectionHeading } from "../components/common/SectionHeading";
+import { handleTabKeys } from "../utils/tabKeyboard";
 
 export default function Process() {
   const [selected, setSelected] = useState(0);

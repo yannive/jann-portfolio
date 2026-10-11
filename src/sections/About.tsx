@@ -1,6 +1,7 @@
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { profile } from "../data/profile";
-import { Reveal, SectionHeading } from "./Shared";
+import { Reveal } from "../components/common/Reveal";
+import { SectionHeading } from "../components/common/SectionHeading";
 export default function About() {
   return (
     <section id="about" className="about-band">

@@ -1,6 +1,7 @@
 import { GraduationCap, ArrowUpRight } from "lucide-react";
 import { profile, experience, certifications } from "../data/profile";
-import { Reveal, SectionHeading } from "./Shared";
+import { Reveal } from "../components/common/Reveal";
+import { SectionHeading } from "../components/common/SectionHeading";
 export default function Experience() {
   return (
     <section id="experience" className="section container experience">

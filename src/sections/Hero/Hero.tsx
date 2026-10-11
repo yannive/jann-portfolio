@@ -5,9 +5,9 @@ import {
   useReducedMotion,
   useSpring,
 } from "framer-motion";
-import { useMediaQuery } from "../hooks/useMediaQuery";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import ProfilePhoto from "./ProfilePhoto";
-import { SocialLinks } from "./Shared";
+import { SocialLinks } from "../../components/common/SocialLinks";
 
 export default function Hero() {
   const reduce = useReducedMotion();

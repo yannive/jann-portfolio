@@ -298,9 +298,6 @@ summary:focus-visible {
 .project-electrodesk {
   padding-top: 72px;
 }
-.project-commerce {
-  padding-top: 62px;
-}
 .project-visual {
   width: 100%;
   height: 355px;
@@ -322,11 +319,6 @@ summary:focus-visible {
   background: #e7eade;
   height: 340px;
   padding: 35px 65px 0;
-}
-.project-commerce .project-visual {
-  background: #ece6dc;
-  height: 340px;
-  padding: 35px 30px 0;
 }
 .project-visual > img {
   position: absolute;
@@ -727,143 +719,6 @@ summary:focus-visible {
   color: #39462f;
   font-size: 9px;
 }
-.shop-preview {
-  height: 300px;
-  width: 100%;
-  background: #fcfaf5;
-  position: relative;
-  border-radius: 3px;
-  box-shadow: 0 10px 30px #493c2412;
-  padding: 20px;
-  overflow: hidden;
-}
-.shop-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  font-size: 8px;
-}
-.shop-nav b {
-  font-size: 10px;
-}
-.shop-nav b > span {
-  font-weight: 400;
-}
-.shop-nav > span {
-  font-size: 6px;
-}
-.shop-copy {
-  position: relative;
-  z-index: 2;
-  margin-top: 38px;
-}
-.shop-copy > small {
-  font-size: 5px;
-  letter-spacing: 1.1px;
-}
-.shop-copy h4 {
-  font-family: Georgia, serif;
-  font-size: 28px;
-  line-height: 1.2;
-  font-weight: 400;
-  letter-spacing: -1px;
-  margin-top: 10px;
-}
-.shop-copy h4 i {
-  color: #897455;
-}
-.shop-button {
-  font-size: 6px;
-  display: inline-block;
-  padding: 8px 10px;
-  background: #3b3d30;
-  color: #fff;
-  margin-top: 15px;
-}
-.shop-caption {
-  font-size: 6px;
-  position: absolute;
-  bottom: 12px;
-  left: 20px;
-}
-.still-life {
-  position: absolute;
-  right: -6px;
-  bottom: 32px;
-  width: 48%;
-  height: 155px;
-  background: #ebe4d4;
-  border-radius: 50% 50% 0 0;
-}
-.vase {
-  position: absolute;
-  bottom: 10px;
-  right: 25px;
-  width: 62px;
-  height: 94px;
-  border-radius: 24% 24% 36% 36%;
-  background: linear-gradient(90deg, #b9ab8f, #e1d5b9 35%, #baac90);
-  box-shadow: 10px 9px 10px #7065481c;
-}
-.vase:before {
-  content: "";
-  position: absolute;
-  left: 13px;
-  top: -14px;
-  height: 22px;
-  width: 35px;
-  background: #c5b99e;
-  border-radius: 7px 7px 0 0;
-}
-.vase > span {
-  position: absolute;
-  width: 2px;
-  height: 70px;
-  background: #6a714c;
-  bottom: 93px;
-  left: 30px;
-  transform: rotate(20deg);
-}
-.vase > span:nth-child(2) {
-  transform: rotate(-25deg);
-  height: 85px;
-}
-.vase > span:nth-child(3) {
-  transform: rotate(48deg);
-  height: 58px;
-}
-.vase > span:after {
-  content: "";
-  position: absolute;
-  top: 4px;
-  right: 0;
-  width: 20px;
-  height: 9px;
-  border-radius: 0 80% 0 80%;
-  background: #747b55;
-}
-.book {
-  position: absolute;
-  bottom: 8px;
-  left: 0;
-  width: 66px;
-  height: 12px;
-  background: #c5b086;
-  box-shadow:
-    0 -4px #f1e5cf,
-    0 -7px #8e7350;
-  transform: rotate(-7deg);
-}
-.cup {
-  position: absolute;
-  left: 12px;
-  bottom: 25px;
-  width: 34px;
-  height: 37px;
-  background: linear-gradient(90deg, #a1a18a, #d0ccb1);
-  border-radius: 0 0 12px 12px;
-}
 .about-band {
   background: #eceee5;
   border-block: 1px solid #e2e5d9;
@@ -1210,74 +1065,6 @@ summary:focus-visible {
 }
 .socials a:hover {
   color: var(--olive);
-}
-.contact-form {
-  padding-top: 12px;
-}
-.contact-form label {
-  display: flex;
-  flex-direction: column;
-  font-size: 10px;
-  gap: 12px;
-  margin-bottom: 29px;
-}
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-.contact-form input,
-.contact-form textarea {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #b9c2aa;
-  padding: 0 0 13px;
-  font-size: 12px;
-  color: var(--ink);
-  border-radius: 0;
-  min-width: 0;
-  width: 100%;
-}
-.contact-form textarea {
-  resize: vertical;
-}
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  color: #6c765f;
-  opacity: 1;
-}
-.contact-form .button {
-  width: 100%;
-  justify-content: space-between;
-}
-.form-note {
-  font-size: 10px;
-  color: #606d50;
-  margin-bottom: 16px;
-}
-.form-status > p {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  font-size: 11px;
-  line-height: 1.7;
-  margin-top: 18px;
-}
-.form-status svg {
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.contact-form > .text-link {
-  margin-top: 16px;
-}
-.draft-details {
-  font-size: 11px;
-  margin-top: 15px;
-}
-.draft-details pre {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  margin-top: 10px;
 }
 .footer {
   display: flex;
@@ -1644,46 +1431,6 @@ summary:focus-visible {
   .ticket {
     width: 145px;
   }
-  .project-commerce .project-visual {
-    height: 270px;
-    padding: 25px 15px 0;
-  }
-  .shop-preview {
-    height: 245px;
-    padding: 14px;
-  }
-  .shop-copy {
-    margin-top: 30px;
-  }
-  .shop-copy h4 {
-    font-size: 23px;
-  }
-  .shop-nav b {
-    font-size: 8px;
-  }
-  .shop-nav > span {
-    display: none;
-  }
-  .still-life {
-    height: 110px;
-    right: -10px;
-    width: 43%;
-  }
-  .vase {
-    transform: scale(0.7);
-    transform-origin: bottom right;
-    right: 15px;
-  }
-  .cup {
-    transform: scale(0.7);
-    transform-origin: bottom left;
-  }
-  .book {
-    width: 50px;
-  }
-  .shop-caption {
-    left: 14px;
-  }
   .project-meta {
     font-size: 7px;
     letter-spacing: 0.7px;
@@ -1758,18 +1505,7 @@ summary:focus-visible {
     line-height: 1.7;
     max-width: 220px;
   }
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  .contact-form label {
-    margin-bottom: 23px;
-  }
   .contact-grid h2 + p {
-    font-size: 11px;
-  }
-  .contact-form input,
-  .contact-form textarea {
     font-size: 11px;
   }
   .experience {
@@ -1874,8 +1610,7 @@ summary:focus-visible {
     grid-template-columns: 1fr;
     gap: 37px;
   }
-  .project-electrodesk,
-  .project-commerce {
+  .project-electrodesk {
     padding-top: 0;
   }
   .project-visual {
@@ -1922,30 +1657,6 @@ summary:focus-visible {
   }
   .queue-body {
     padding-top: 20px;
-  }
-  .project-commerce .project-visual {
-    height: 305px;
-    padding: 30px 30px 0;
-  }
-  .shop-preview {
-    height: 280px;
-    padding: 20px;
-  }
-  .shop-copy h4 {
-    font-size: 29px;
-  }
-  .shop-nav b {
-    font-size: 10px;
-  }
-  .shop-nav > span {
-    display: block;
-  }
-  .still-life {
-    height: 145px;
-    width: 46%;
-  }
-  .vase {
-    transform: scale(0.9);
   }
   .about-grid {
     grid-template-columns: 1fr;
@@ -2079,24 +1790,6 @@ summary:focus-visible {
   }
   .contact-grid .socials {
     margin-top: 15px;
-  }
-  .contact-form input,
-  .contact-form textarea {
-    font-size: 16px;
-  }
-  .contact-form input::placeholder,
-  .contact-form textarea::placeholder {
-    font-size: 12px;
-  }
-  .contact-form label {
-    font-size: 11px;
-  }
-  .form-row {
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-  }
-  .contact-form .button {
-    padding: 16px;
   }
   .footer {
     align-items: flex-start;
