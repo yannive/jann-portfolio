@@ -1,4 +1,4 @@
-﻿import heroPortrait from "../assets/profile.jpg";
+﻿import heroPortrait from "../assets/hero-portrait.webp";
 import aboutPortrait from "../assets/about-portrait.jpg";
 
 export const profileImage = heroPortrait;

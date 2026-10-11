@@ -4,14 +4,14 @@ import { profileImage } from "../../data/profileImage";
 export default function ProfilePhoto() {
   const [failed, setFailed] = useState(false);
   return (
-    <div className="hero-photo-wrap">
+    <figure className="hero-photo-wrap">
       <div className="hero-photo">
         {profileImage && !failed ? (
           <img
             src={profileImage}
             alt="Jann Eirich Cipriano"
-            width={480}
-            height={540}
+            width={1122}
+            height={1402}
             className="object-cover"
             fetchPriority="high"
             onError={() => setFailed(true)}
@@ -27,9 +27,9 @@ export default function ProfilePhoto() {
           </div>
         )}
       </div>
-      <p className="hero-photo-caption">
+      <figcaption className="hero-photo-caption">
         Jann Eirich N. Cipriano<span>DESIGNER & DEVELOPER</span>
-      </p>
-    </div>
+      </figcaption>
+    </figure>
   );
 }
