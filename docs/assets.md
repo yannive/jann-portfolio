@@ -2,7 +2,7 @@
 
 ## Portraits
 
-`src/assets/hero-portrait.webp` supplies Hero; `src/assets/about-portrait.jpg` supplies About. `src/data/profileImage.ts` imports both, so Vite fingerprints them. Keep their crop positions in `src/styles/polish.css`. Hero loads eagerly with high priority; About loads lazily. The Hero also has a runtime image-error fallback.
+`src/assets/hero-portrait.webp` supplies both Hero and About. `src/data/profileImage.ts` imports both, so Vite fingerprints them. Keep their crop positions in `src/styles/polish.css`. Hero loads eagerly with high priority; About loads lazily. The Hero also has a runtime image-error fallback.
 
 ## Project screenshots
 

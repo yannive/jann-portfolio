@@ -19,6 +19,8 @@ export default function About() {
               <img
                 src={profile.photo}
                 alt="Jann Eirich Cipriano"
+                width={1122}
+                height={1402}
                 loading="lazy"
               />
             ) : (

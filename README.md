@@ -53,7 +53,7 @@ Preserve the CSS import order in `main.tsx`: base, interactions, hero/contact, p
 - `src/data/profile.ts`: education, experience, and certifications. Empty arrays hide optional entries.
 - `src/data/skills.ts`: skill labels and descriptions. Android Studio remains portfolio content, not an app dependency.
 - `src/data/process.ts`: the general workflow.
-- `src/data/profileImage.ts`: required portrait imports. Replace `src/assets/hero-portrait.webp` for Hero or `about-portrait.jpg` for About.
+- `src/data/profileImage.ts`: required portrait imports. Replace `src/assets/hero-portrait.webp` to update both Hero and About.
 - Section components: introduction, About copy, services, and other small related content.
 
 Dialogs retain keyboard tabs, Escape dismissal, scroll locking, and focus restoration. Gallery state remains in the dialog so tab switches preserve the selected slide. Reduced motion and mobile pointer behavior are retained. Only the theme choice is stored in localStorage (`jann-theme`).
