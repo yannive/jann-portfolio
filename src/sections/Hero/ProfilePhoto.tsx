@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { profileImage } from "../../data/profileImage";
+import { Hand, X } from "lucide-react";
 
 export default function ProfilePhoto() {
   const [failed, setFailed] = useState(false);
+  const [greeting, setGreeting] = useState(false);
   return (
     <figure className="hero-photo-wrap">
       <div className="hero-photo">
@@ -30,6 +32,20 @@ export default function ProfilePhoto() {
       <figcaption className="hero-photo-caption">
         Jann Eirich N. Cipriano<span>DESIGNER & DEVELOPER</span>
       </figcaption>
+      <button
+        className="portrait-wave"
+        aria-label={greeting ? "Close greeting" : "Say hello to Jann"}
+        aria-expanded={greeting}
+        aria-controls="portrait-greeting"
+        onClick={() => setGreeting(!greeting)}
+      >
+        {greeting ? <X size={19} /> : <Hand size={19} />}
+        {greeting ? "See you around!" : "Say hello"}
+      </button>
+      <div id="portrait-greeting" className="portrait-greeting" hidden={!greeting}>
+        <p>Hey, thanks for stopping by! Have an idea in mind?</p>
+        <a href="#contact" onClick={() => setGreeting(false)}>Let’s talk <span aria-hidden="true">↗</span></a>
+      </div>
     </figure>
   );
 }

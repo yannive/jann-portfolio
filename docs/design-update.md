@@ -15,6 +15,13 @@ Implemented on `design/project-focused-portfolio`. Publication to GitHub and the
 
 ## Maintenance
 
+### Interactive details
+
+- Project dialogs include Previous/Next controls for the three documented project stories, resetting to Overview while preserving modal focus and the original launch control.
+- Screenshot previews respond gently to mouse position. Touch interaction remains a normal tap; reduced-motion preferences disable the tilt.
+- The portrait includes an optional greeting disclosure with a direct contact link. The primary hero contact action remains available.
+- `src/styles/playful.css` follows the project refinement layer. No dependencies were added.
+
 `src/styles/project-focus.css` is the final refinement layer, imported after the existing styles. Project screenshot dimensions and crops are in `src/data/projects.ts`; `demonstrated` describes only what is visible in supplied screenshots. Do not use it as proof of operational or deployed functionality.
 
 ## Validation

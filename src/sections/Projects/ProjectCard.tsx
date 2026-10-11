@@ -1,6 +1,7 @@
 import { ArrowUpRight, Figma, Github } from "lucide-react";
 import type { Project } from "../../data/projects";
 import ProjectImage from "./ProjectImage";
+import InteractivePreview from "../../components/common/InteractivePreview";
 
 export default function ProjectCard({
   project,
@@ -41,6 +42,7 @@ export default function ProjectCard({
       className={`project project-${project.id} ${project.id === "shawarma" ? "project-lead" : ""}`}
     >
       {cover && (
+        <InteractivePreview>
         <button
           className="project-visual screenshot-cover"
           onClick={() => onOpen(project)}
@@ -48,9 +50,11 @@ export default function ProjectCard({
         >
           <ProjectImage image={cover} />
           <span className="project-open" aria-hidden="true">
+            <span>Take a closer look</span>
             <ArrowUpRight size={22} />
           </span>
         </button>
+        </InteractivePreview>
       )}
       <div className="project-copy">
         <div className="project-meta">

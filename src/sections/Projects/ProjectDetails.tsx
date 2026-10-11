@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowUpRight, Github, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Github, X } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { type Project } from "../../data/projects";
+import { projects, type Project } from "../../data/projects";
 import ProjectGallery from "./ProjectGallery";
 import { handleTabKeys } from "../../utils/tabKeyboard";
 
@@ -17,15 +17,24 @@ const tabs = [
 export default function ProjectDetails({
   project,
   onClose,
+  onNavigate,
 }: {
   project: Project | null;
   onClose: () => void;
+  onNavigate: (project: Project) => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [tab, setTab] = useState<(typeof tabs)[number]>("Overview");
   const [slide, setSlide] = useState(0);
   const [imageFailed, setImageFailed] = useState(false);
   const reduce = useReducedMotion();
+  const tour = projects.filter((item) => !item.figmaUrl);
+  const position = tour.findIndex((item) => item.id === project?.id);
+  const navigate = (step: number) => {
+    setTab("Overview");
+    onNavigate(tour[(position + step + tour.length) % tour.length]);
+    dialog.current?.scrollTo({ top: 0, behavior: "instant" });
+  };
   const visibleTabs = tabs.filter((item) => {
     if (!project) return false;
     if (item === "Features")
@@ -125,6 +134,18 @@ export default function ProjectDetails({
               </div>
             )}
           </div>
+          <nav className="project-tour" aria-label="Browse project stories">
+            <button onClick={() => navigate(-1)} aria-label="Previous project">
+              <ArrowLeft size={17} /> Previous
+            </button>
+            <span role="status" aria-live="polite" aria-atomic="true">
+              <span className="tour-position" aria-hidden="true">{position + 1} / {tour.length}</span>
+              <span className="tour-announcement">Project {position + 1} of {tour.length}: {project.title}</span>
+            </span>
+            <button onClick={() => navigate(1)} aria-label="Next project">
+              Next <ArrowRight size={17} />
+            </button>
+          </nav>
           <div
             role="tablist"
             className="detail-tabs"

@@ -94,7 +94,11 @@ export default function Projects() {
           )}
         </motion.div>
       </AnimatePresence>
-      <ProjectDetails project={selected} onClose={() => setSelected(null)} />
+      <ProjectDetails
+        project={selected}
+        onClose={() => setSelected(null)}
+        onNavigate={setSelected}
+      />
     </section>
   );
 }
