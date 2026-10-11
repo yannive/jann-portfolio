@@ -15,9 +15,13 @@ function SkillGroup({
   const [selected, setSelected] = useState(group.items[0]);
   const reduce = useReducedMotion();
   return (
-    <div className="skill-row">
-      <span className="row-index">0{index + 1}</span>
-      <h3>{group.title}</h3>
+    <details className="skill-row" open={index < 2}>
+      <summary>
+        <h3>{group.title}</h3>
+        <span>
+          {group.items.length} skills <span aria-hidden="true">+</span>
+        </span>
+      </summary>
       <div className="skill-content">
         <div className="tags" role="group" aria-label={`${group.title} skills`}>
           {group.items.map((item) => (
@@ -52,12 +56,12 @@ function SkillGroup({
           </motion.p>
         </div>
       </div>
-    </div>
+    </details>
   );
 }
 export default function Skills() {
   return (
-    <section id="skills" className="section container">
+    <section id="skills" className="section container compact-skills">
       <Reveal>
         <SectionHeading
           number="03"
@@ -65,7 +69,7 @@ export default function Skills() {
           title="The right tools for the idea."
         >
           <p>
-            Hover, focus, or tap a skill
+            Open a group, then select a skill
             <br />
             to see how I use it.
           </p>

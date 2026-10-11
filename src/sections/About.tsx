@@ -1,5 +1,4 @@
-import { ArrowUpRight, MapPin } from "lucide-react";
-import { profile } from "../data/profile";
+import { MapPin } from "lucide-react";
 import { Reveal } from "../components/common/Reveal";
 import { SectionHeading } from "../components/common/SectionHeading";
 export default function About() {
@@ -13,30 +12,7 @@ export default function About() {
             title="A designer's eye. A developer's mind."
           />
         </Reveal>
-        <div className="about-grid">
-          <Reveal className="portrait">
-            {profile.photo ? (
-              <img
-                src={profile.photo}
-                alt="Jann Eirich Cipriano"
-                width={1122}
-                height={1402}
-                loading="lazy"
-              />
-            ) : (
-              <div className="portrait-placeholder">
-                <span className="portrait-cross">+</span>
-                <span className="monogram">
-                  jc<span>.</span>
-                </span>
-                <span className="photo-note">CURIOUS MIND. HANDS-ON MAKER.</span>
-              </div>
-            )}
-            <div className="portrait-caption">
-              <span>Jann Eirich N. Cipriano</span>
-              <ArrowUpRight size={19} />
-            </div>
-          </Reveal>
+        <div className="about-editorial">
           <Reveal className="about-copy">
             <p className="about-lead">
               Curious by nature.

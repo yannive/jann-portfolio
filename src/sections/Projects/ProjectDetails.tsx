@@ -26,9 +26,19 @@ export default function ProjectDetails({
   const [slide, setSlide] = useState(0);
   const [imageFailed, setImageFailed] = useState(false);
   const reduce = useReducedMotion();
-  const visibleTabs = tabs.filter(
-    (item) => item !== "Video" || project?.featured || project?.video,
-  );
+  const visibleTabs = tabs.filter((item) => {
+    if (!project) return false;
+    if (item === "Features")
+      return Boolean(project.features.length || project.demonstrated?.length);
+    if (item === "Screenshots")
+      return Boolean(
+        project.screenshots?.some((image) => !image.placeholder) ||
+        project.image,
+      );
+    if (item === "Workflow") return Boolean(project.process?.length);
+    if (item === "Video") return Boolean(project.video?.src);
+    return Boolean(project.description || project.problem || project.solution);
+  });
   useEffect(() => {
     setTab("Overview");
     setSlide(0);
@@ -44,7 +54,7 @@ export default function ProjectDetails({
     dialog.current?.close();
   }, [project]);
   const screenshots = project?.screenshots?.length
-    ? project.screenshots
+    ? project.screenshots.filter((image) => !image.placeholder)
     : project?.image
       ? [
           {
@@ -56,13 +66,34 @@ export default function ProjectDetails({
       : [];
   const changeSlide = (index: number) => {
     setImageFailed(false);
-    setSlide((index + screenshots.length) % screenshots.length);
+    if (screenshots.length)
+      setSlide((index + screenshots.length) % screenshots.length);
   };
   return (
     <dialog
       ref={dialog}
       className="project-dialog"
       aria-labelledby="project-dialog-title"
+      onKeyDown={(event) => {
+        if (event.key !== "Tab") return;
+        const controls = Array.from(
+          event.currentTarget.querySelectorAll<HTMLElement>(
+            'a[href], button:not(:disabled), video[controls], [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter(
+          (element) =>
+            element.getClientRects().length > 0 && element.tabIndex >= 0,
+        );
+        const first = controls[0];
+        const last = controls.at(-1);
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }}
       onCancel={(event) => {
         event.preventDefault();
         onClose();
@@ -110,7 +141,11 @@ export default function ProjectDetails({
                 tabIndex={tab === item ? 0 : -1}
                 onClick={() => setTab(item)}
               >
-                {item}
+                {item === "Features"
+                  ? "Scope"
+                  : item === "Workflow"
+                    ? "Development plan"
+                    : item}
               </button>
             ))}
           </div>
@@ -128,15 +163,13 @@ export default function ProjectDetails({
                 <motion.div
                   initial={reduce ? false : { opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: reduce ? 0 : 0.15 }}
                 >
                   {item === "Screenshots" ? (
                     <ProjectGallery
-                      project={project}
                       screenshots={screenshots}
                       slide={slide}
                       imageFailed={imageFailed}
-                      reduce={reduce}
                       changeSlide={changeSlide}
                       onImageError={() => setImageFailed(true)}
                     />

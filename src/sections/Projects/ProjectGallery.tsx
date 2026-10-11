@@ -1,62 +1,60 @@
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
-import type { Project } from "../../data/projects";
-import ProjectPreview from "./ProjectPreview";
+import { useState } from "react";
+import { ArrowLeft, ArrowRight, Expand, Minimize } from "lucide-react";
+import type { ProjectScreenshot } from "../../data/projects";
+import ProjectImage from "./ProjectImage";
 
 export default function ProjectGallery({
-  project,
   screenshots,
   slide,
   imageFailed,
-  reduce,
   changeSlide,
   onImageError,
 }: {
-  project: Project;
-  screenshots: NonNullable<Project["screenshots"]>;
+  screenshots: ProjectScreenshot[];
   slide: number;
   imageFailed: boolean;
-  reduce: boolean | null;
   changeSlide: (index: number) => void;
   onImageError: () => void;
 }) {
+  const [expanded, setExpanded] = useState(false);
+  const image = screenshots[slide];
+  if (!image) return null;
   return (
     <>
-      <h3>Screenshots & interface</h3>
-      {screenshots.some(
-        (screenshot) => "placeholder" in screenshot && screenshot.placeholder,
-      ) && (
-        <p className="gallery-notice">
-          These local placeholders show planned views, not actual application
-          screenshots. No client records are displayed.
-        </p>
-      )}
+      <div className="gallery-heading">
+        <h3>Interface preview</h3>
+        {!imageFailed && (
+          <button
+            className="text-link"
+            aria-pressed={expanded}
+            onClick={() => setExpanded(!expanded)}
+          >
+            {expanded ? <Minimize size={18} /> : <Expand size={18} />}
+            {expanded ? "Fit to view" : "View larger"}
+          </button>
+        )}
+      </div>
       <figure className="screenshot-figure">
-        {screenshots.length > 0 && !imageFailed ? (
-          <motion.img
-            key={slide}
-            initial={{ opacity: reduce ? 1 : 0 }}
-            animate={{ opacity: 1 }}
-            src={screenshots[slide]?.src}
-            alt={screenshots[slide]?.alt}
-            onError={onImageError}
-          />
+        {imageFailed ? (
+          <p role="status">This image could not be loaded.</p>
         ) : (
           <div
-            className={`gallery-placeholder project-${project.id}`}
-            aria-hidden="true"
+            className={`screenshot-scroll ${expanded ? "is-expanded" : ""}`}
+            tabIndex={expanded ? 0 : undefined}
+            role="region"
+            aria-label="Project screenshot"
           >
-            <ProjectPreview id={project.id} />
+            <ProjectImage image={image} onError={onImageError} />
           </div>
         )}
-        <figcaption>
-          {imageFailed
-            ? "This screenshot is unavailable. An illustrative preview is shown instead."
-            : screenshots.length
-              ? screenshots[slide]?.caption
-              : "Illustrative preview — actual project screenshots will be added here."}
-        </figcaption>
+        <figcaption>{image.caption}</figcaption>
       </figure>
+      {expanded && (
+        <p className="gallery-help">
+          Scroll across the image to inspect the interface. Choose “Fit to view”
+          to return.
+        </p>
+      )}
       {screenshots.length > 1 && (
         <div className="gallery-controls">
           <button

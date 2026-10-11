@@ -5,6 +5,7 @@ import "./styles/styles.css";
 import "./styles/interactions.css";
 import "./styles/hero-contact.css";
 import "./styles/polish.css";
+import "./styles/project-focus.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />

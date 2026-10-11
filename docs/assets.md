@@ -2,7 +2,7 @@
 
 ## Portraits
 
-`src/assets/hero-portrait.webp` supplies both Hero and About. `src/data/profileImage.ts` imports both, so Vite fingerprints them. Keep their crop positions in `src/styles/polish.css`. Hero loads eagerly with high priority; About loads lazily. The Hero also has a runtime image-error fallback.
+`src/assets/hero-portrait.webp` supplies the Hero portrait, imported and fingerprinted by Vite. About uses a compact text layout without a repeated portrait. Hero loads eagerly with high priority and retains an image-error fallback.
 
 ## Project screenshots
 
@@ -20,7 +20,7 @@ screenshots: [
 ],
 ```
 
-The first screenshot supplies the card cover unless `image` is set. Cards load lazily; gallery images load when their tab opens. Multiple screenshots enable previous/next controls. `ProjectPreview.tsx` supplies the illustrative fallback for missing/failed gallery images and must remain.
+The first non-placeholder screenshot supplies the card cover. Cards load lazily; gallery images load when their tab opens. Multiple screenshots enable previous/next controls. Missing and placeholder galleries are hidden, and load failures show a clear message rather than invented interface artwork.
 
 ## Optional video
 
@@ -32,6 +32,12 @@ video: {
 },
 ```
 
-Create `public/videos/` only when needed. Use browser-playable MP4/WebM or a direct video URL, not a watch-page URL. Captions are optional but recommended. Featured projects retain their availability message when no video exists.
+Create `public/videos/` only when needed. Use browser-playable MP4/WebM or a direct video URL, not a watch-page URL. Captions are optional but recommended. The Video tab is hidden unless a real video source exists.
 
 The favicon stays at `public/favicon.svg`; icons use Lucide. System fonts need no font downloads. Keep documentation outside `public/` and check screenshots for private information before publication.
+
+## Display-only cropping
+
+Screenshots can declare original `width` and `height`, plus a `crop` rectangle (`x`, `y`, `width`, `height`) in original pixels. `ProjectImage` clips the display without changing the asset. The Shawarma and MR-PRIDE crops exclude browser controls, scrollbars, and the Windows taskbar. The gallery uses the same crop; View larger enables a keyboard-scrollable enlarged view. PrediQueue retains its full-page image in the gallery.
+
+AXIS has a working Figma prototype link but no supplied interface image. Add a genuine export before replacing its compact prototype card with a screenshot. No r?sum? asset exists, so there is no download control.

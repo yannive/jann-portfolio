@@ -20,7 +20,7 @@ const services = [
 ];
 export default function Services() {
   return (
-    <section className="services-band">
+    <section className="services-band compact-services">
       <div className="container section">
         <Reveal>
           <SectionHeading

@@ -1,42 +1,16 @@
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, ArrowUpRight, MapPin } from "lucide-react";
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-} from "framer-motion";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
 import ProfilePhoto from "./ProfilePhoto";
 import { SocialLinks } from "../../components/common/SocialLinks";
 
 export default function Hero() {
   const reduce = useReducedMotion();
-  const desktop = useMediaQuery(
-    "(hover: hover) and (pointer: fine) and (min-width: 801px)",
-  );
-  const x = useMotionValue(0),
-    y = useMotionValue(0);
-  const smoothX = useSpring(x, { stiffness: 90, damping: 24 });
-  const smoothY = useSpring(y, { stiffness: 90, damping: 24 });
   const entrance = {
     hidden: { opacity: 0, y: reduce ? 0 : 16 },
     visible: { opacity: 1, y: 0 },
   };
   return (
-    <section
-      id="home"
-      className="hero container"
-      onPointerMove={(event) => {
-        if (!desktop || reduce) return;
-        const rect = event.currentTarget.getBoundingClientRect();
-        x.set(((event.clientX - rect.left) / rect.width - 0.5) * 8);
-        y.set(((event.clientY - rect.top) / rect.height - 0.5) * 6);
-      }}
-      onPointerLeave={() => {
-        x.set(0);
-        y.set(0);
-      }}
-    >
+    <section id="home" className="hero container">
       <motion.div
         initial={reduce ? false : "hidden"}
         animate="visible"
@@ -52,18 +26,13 @@ export default function Hero() {
         </motion.div>
         <div className="hero-layout">
           <motion.div variants={entrance} className="hero-portrait">
-            <ProfilePhoto /><div className="hero-note">UI/UX Design &amp; Web Development</div>
+            <ProfilePhoto />
           </motion.div>
           <div className="hero-copy">
             <motion.p variants={entrance} className="hero-intro">
               JANN CIPRIANO / DESIGNER & DEVELOPER
             </motion.p>
-            <motion.div
-              style={{
-                x: desktop && !reduce ? smoothX : 0,
-                y: desktop && !reduce ? smoothY : 0,
-              }}
-            >
+            <motion.div>
               <h1>
                 <motion.span variants={entrance} className="headline-line">
                   Thoughtful design.
@@ -86,19 +55,20 @@ export default function Hero() {
                 <a className="role-link" href="#projects">
                   Web Developer
                 </a>{" "}
-                based in Manila. I design clear, accessible interfaces and develop responsive web applications that simplify everyday tasks.
+                based in Manila. I build thoughtful interfaces and practical web
+                systems.
               </p>
               <div className="hero-actions">
                 <a className="button primary" href="#projects">
                   Explore my work <ArrowUpRight size={18} />
                 </a>
                 <a className="button secondary" href="#contact">
-                  Contact details <ArrowUpRight size={18} />
+                  Get in touch <ArrowUpRight size={18} />
                 </a>
               </div>
             </motion.div>
             <motion.div variants={entrance} className="hero-socials">
-              <SocialLinks showLabels />
+              <SocialLinks socialOnly />
             </motion.div>
           </div>
         </div>
