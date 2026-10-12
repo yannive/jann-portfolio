@@ -1,5 +1,5 @@
 import { useState } from "react";
-import portrait from "../../assets/profile.jpg";
+import { profileImage } from "../../data/profileImage";
 
 export default function ProfilePhoto() {
   const [failed, setFailed] = useState(false);
@@ -7,7 +7,7 @@ export default function ProfilePhoto() {
     <figure className="portrait-studio">
       <div className="portrait-studio-image">
         {!failed ? (
-          <img src={portrait} alt="Jann Eirich Cipriano" width={2048} height={1536} fetchPriority="high" onError={() => setFailed(true)} />
+          <img src={profileImage} alt="Jann Eirich Cipriano" width={1122} height={1402} fetchPriority="high" onError={() => setFailed(true)} />
         ) : (
           <span className="portrait-monogram" role="img" aria-label="Jann Cipriano monogram">jc.</span>
         )}
