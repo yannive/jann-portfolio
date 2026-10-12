@@ -33,6 +33,9 @@ export default function Projects() {
           </p>
         </SectionHeading>
       </Reveal>
+      <button className="project-tour-start" onClick={() => setSelected(projects.find((project) => !project.figmaUrl) ?? null)}>
+        Start project tour <span aria-hidden="true">↗</span>
+      </button>
       <div
         className="project-filters"
         role="group"
